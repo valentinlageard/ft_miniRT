@@ -6,7 +6,8 @@ SRC			=	src/miniRT.c \
 				src/parsing/parse_scene.c \
 				src/parsing/parsing_utils.c \
 				src/parsing/parse_objects.c \
-				src/scene/camera.c
+				src/scene/camera.c \
+				src/scene/sphere.c
 
 OBJS		=	$(SRC:.c=.o)
 

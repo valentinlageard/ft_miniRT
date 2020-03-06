@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:49:02 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/06 17:49:43 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/06 19:01:03 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ int main(int ac, char **av)
 		prog = init_prog();
 		// Check .rt
 		parse_file(av[1], prog);
-		printf("prog->cams->pos->x : %f\n", prog->cams->pos->x);
-		printf("prog->cams->next->pos->x : %f\n", prog->cams->next->pos->x);
-		printf("prog->cams->next->next : %p\n", prog->cams->next->next);
+		//printf("prog->spheres->next->pos->x : %f\n", prog->spheres->next->pos->x);
+		//printf("prog->spheres->next->next : %p\n", prog->spheres->next->next);
 		// Compute raytraced image
 		// Create window and print image
 		// Wait for instructions

@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:36 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/06 17:47:38 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/06 18:59:40 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	parse_line(char *line, t_prog *prog) {
 		parse_resolution(line, prog);
 	else if (line[0] == 'c')
 		parse_camera(line, prog);
+	else if (line[0] == 's')
+	{
+		if (line[1] == 'p')
+			parse_sphere(line, prog);
+	}
 }
 
 void	parse_file(char *filename, t_prog *prog)
@@ -31,6 +36,6 @@ void	parse_file(char *filename, t_prog *prog)
 		parse_line(line, prog);
 		free(line);
 	}
-	//parse line
+	parse_line(line, prog);
 	free(line);
 }

@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/06 17:48:12 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/06 18:47:44 by vlageard         ###   ########.fr       */
+/*   Created: 2020/03/06 18:34:42 by vlageard          #+#    #+#             */
+/*   Updated: 2020/03/06 18:56:19 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_prog	*init_prog(void)
+t_sphere	*new_sphere(void)
 {
-	t_prog	*prog;
-
-	if (!(prog = malloc(sizeof(t_prog))))
+	t_sphere	*new_sphere;
+	
+	if (!(new_sphere = (t_sphere *)malloc(sizeof(t_sphere))))
 		return (NULL);
-	prog->mlx_ptr = mlx_init();
-	prog->win_ptr = NULL;
-	prog->win_width = 0;
-	prog->win_height = 0;
-	prog->cams = NULL;
-	prog->spheres = NULL;
-	return(prog);
+	new_sphere->next = NULL;
+	return(new_sphere);
 }
 
-void	init_win(int width, int height, t_prog *prog)
+void	push_back_sphere(t_sphere **first_sphere, t_sphere *new_sphere)
 {
-	prog->win_width = width;
-	prog->win_height = height;
-	prog->win_ptr = mlx_new_window(prog->mlx_ptr, width, height, "miniRT");
+	t_sphere	*tmp;
+
+	if (*first_sphere == NULL)
+		*first_sphere = new_sphere;
+	else
+	{
+		tmp = *first_sphere;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new_sphere;
+	}
 }
