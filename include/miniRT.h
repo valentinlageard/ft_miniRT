@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/06 18:51:28 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/06 23:24:35 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct		s_cam {
 }					t_cam;
 
 typedef struct		s_object {
-	char			*type;
+	char			type;
 	void			*object;
 	struct s_object	*next;
 }					t_object;
@@ -61,6 +61,7 @@ typedef struct		s_prog {
 	int				win_width;
 	int				win_height;
 	t_cam			*cams;
+	t_object		*objects;
 	t_sphere		*spheres;
 	// lights
 	// objects
@@ -81,6 +82,10 @@ t_color				*word_to_color(char *word);
 // Camera
 t_cam				*new_camera(void);
 void				push_back_cam(t_cam **first_cam, t_cam *new_cam);
+
+// Object
+t_object			*new_object(void);
+void				push_back_object(t_object **first_object, t_object *new_object);
 
 // Sphere
 t_sphere			*new_sphere(void);
