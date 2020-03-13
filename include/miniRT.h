@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/13 16:14:57 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/13 16:32:40 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,14 @@ typedef struct		s_prog {
 	void			*win_ptr;
 	int				win_width;
 	int				win_height;
+	void			*img_ptr;
+	char			*img_pixels;
 	t_cam			*cams;
+	t_cam			*current_cam;
 	t_object		*objects;
 	t_sphere		*spheres;
 	// lights
-	// objects
+	// other objects : planes, triangles, etc...
 }					t_prog;
 
 // General

@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:48:12 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/06 18:47:44 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/13 16:33:00 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ t_prog	*init_prog(void)
 	prog->win_ptr = NULL;
 	prog->win_width = 0;
 	prog->win_height = 0;
+	prog->img_ptr = NULL;
+	prog->img_pixels = NULL;
 	prog->cams = NULL;
+	prog->current_cam = NULL;
+	prog->objects = NULL;
 	prog->spheres = NULL;
 	return(prog);
 }
