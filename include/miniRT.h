@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/13 16:32:40 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/13 17:55:13 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ typedef struct		s_prog {
 	char			*img_pixels;
 	t_cam			*cams;
 	t_cam			*current_cam;
+	t_vec3			*lower_left_corner;
+	t_vec3			*horizontal;
+	t_vec3			*vertical;
 	t_object		*objects;
 	t_sphere		*spheres;
 	// lights
@@ -81,6 +84,7 @@ typedef struct		s_prog {
 // General
 t_prog				*init_prog(void);
 void				init_win(int width, int height, t_prog *prog);
+void				init_img(t_prog *prog);
 
 // Raytrace
 
@@ -102,14 +106,19 @@ t_vec3				*vec3_sub(t_vec3 *vec1, t_vec3 *vec2);
 t_vec3				*vec3_mul(t_vec3 *vec1, t_vec3 *vec2);
 t_vec3				*vec3_div(t_vec3 *vec1, t_vec3 *vec2);
 double				vec3_dot(t_vec3 *vec1, t_vec3 *vec2);
+void				print_vec3(t_vec3 *vec3);
+
 
 // Rays
 t_ray				*new_ray(t_vec3 *origin, t_vec3 *dir);
 void				free_ray(t_ray *ray);
+t_ray				*get_ray(int x, int y, t_prog *prog);
 
 // Camera
 t_cam				*new_camera(void);
 void				push_back_cam(t_cam **first_cam, t_cam *new_cam);
+void				compute_camera_projection(t_prog *prog);
+
 
 // Object
 t_object			*new_object(void);

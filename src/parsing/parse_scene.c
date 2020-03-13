@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:43 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/06 17:47:43 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/13 17:31:07 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void	parse_camera(char *line, t_prog *prog)
 	new_cam->pos = word_to_vector3(words[1]);
 	new_cam->orientation = word_to_vector3(words[2]);
 	new_cam->fov = ft_atoi(words[3]);
+	if (!prog->current_cam)
+		prog->current_cam = new_cam;
 	push_back_cam(&(prog->cams), new_cam);
 }

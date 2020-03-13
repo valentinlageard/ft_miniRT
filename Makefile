@@ -8,6 +8,7 @@ SRC			=	src/miniRT.c \
 				src/parsing/parse_objects.c \
 				src/raytracing/raytrace.c \
 				src/raytracing/ray.c \
+				src/raytracing/img_utils.c \
 				src/scene/camera.c \
 				src/scene/object.c \
 				src/scene/sphere.c \

@@ -6,16 +6,11 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:42:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/13 16:48:03 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/13 18:03:39 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-int		color(t_color *color)
-{
-	return ((color->red << 16) + (color->green << 8) + color->blue);
-}
 
 void	test_color(int x, int y, t_object *current_hit, t_prog *prog)
 {
@@ -69,63 +64,28 @@ void	compute_image(t_prog *prog)
 	int			x;
 	int			y;
 
-	// Définition rapide de la caméra (A ENLEVER)
-	// Supposons que la caméra soit au centre (0,0,0) et orientée vers +z (0,0,1) ?.
-	int		fov = 90;
-	double	theta = (double)(fov)*PI/180.0;
-	double	half_width = (double)(tan(theta/2));
-	double	ratio = ((double)(prog->win_width))/((double)(prog->win_height));
-	double	half_height = ratio * half_width;
-	t_vec3	*lower_left_corner;
-	t_vec3	*horizontal;
-	t_vec3	*vertical;
-	t_vec3	*cam_origin;
-	lower_left_corner = new_vec3(-half_width, -half_height, -1.0);
-	horizontal = new_vec3(2 * half_width, 0.0, 0.0);
-	vertical = new_vec3(0.0, 2 * half_height, 0.0);
 	printf("----------------\n");
 	printf("INITIALIZING\n");
-	printf("win_width : %i / win_height : %i\n", prog->win_width, prog->win_height);
-	printf("theta : %f\n", theta);
-	printf("half_width : %f\n", half_width);
-	printf("ratio : %f\n", ratio);
-	printf("half_height : %f\n", half_height);
-	printf("----------------\n");
-	
-	double u;
-	double v;
-	double dir_x;
-	double dir_y;
-	double dir_z;
-	t_vec3 *direction;
-
 	x = 0;
 	y = 0;
-
-	void	*img_ptr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	img_ptr = mlx_new_image(prog->mlx_ptr, prog->win_width, prog->win_height);
-	prog->img_ptr = img_ptr;
-	prog->img_pixels = mlx_get_data_addr(prog->img_ptr, &bits_per_pixel, &size_line, &endian);	
-
+	init_img(prog);
+	compute_camera_projection(prog);
+	printf("win_width : %i / win_height : %i\n", prog->win_width, prog->win_height);
+	printf("prog->lower_left_corner : ");
+	print_vec3(prog->lower_left_corner);
+	printf("prog->horizontal : ");
+	print_vec3(prog->horizontal);
+	printf("prog->vertical : ");
+	print_vec3(prog->vertical);
+	printf("----------------\n");
 	while (y < prog->win_height) // Pour chaque ligne
 	{
 		while (x < prog->win_width) // Pour chaque pixel dans cette ligne
 		{	
 			//printf("----------------\n");
 			//printf("x : %i / y : %i\n", x, y);
-			u = ((double)(x))/((double)(prog->win_width));
-			v = ((double)(y))/((double)(prog->win_height));
-			//printf("u : %f / v : %f\n", u, v);
-			cam_origin = new_vec3(0.0,0.0,0.0);
-			dir_x = lower_left_corner->x + u * horizontal->x + v * vertical->x - cam_origin->x;
-			dir_y = lower_left_corner->y + u * horizontal->y + v * vertical->y - cam_origin->y;
-			dir_z = lower_left_corner->z + u * horizontal->z + v * vertical->z - cam_origin->z;
-			direction = new_vec3(dir_x, dir_y, dir_z);
-			//printf("dir_x : %f / dir_y : %f / dir_z : %f\n", dir_x, dir_y, dir_z);
-			ray = new_ray(cam_origin, direction);
+			ray = get_ray(x, y, prog);
+			printf("ray->dir->x : %f / ray->dir->y : %f / ray->dir->z : %f\n", ray->dir->x, ray->dir->y, ray->dir->z);
 			current_hit = collide_ray(ray,prog);
 			free_ray(ray);
 			ray = NULL;
