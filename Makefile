@@ -6,9 +6,14 @@ SRC			=	src/miniRT.c \
 				src/parsing/parse_scene.c \
 				src/parsing/parsing_utils.c \
 				src/parsing/parse_objects.c \
+				src/raytracing/raytrace.c \
+				src/raytracing/ray.c \
 				src/scene/camera.c \
 				src/scene/object.c \
-				src/scene/sphere.c
+				src/scene/sphere.c \
+				src/utils/vector.c \
+				src/utils/vector_maths.c \
+				src/utils/solve_quadratic.c
 
 OBJS		=	$(SRC:.c=.o)
 
@@ -17,11 +22,11 @@ CC			=	gcc $(FLAGS)
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(LIBFT) -lmlx -lXext -lX11
-			$(CC) $(OBJS) $(LIBFT) -o $(NAME) -lmlx -lXext -lX11
+$(NAME):	$(OBJS) $(LIBFT) -lmlx -lXext -lX11 -lm
+			$(CC) $(OBJS) $(LIBFT) -o $(NAME) -lmlx -lXext -lX11 -lm
 
 %.o: %.c
-			$(CC) -Iinclude -c $< -o $@  -lmlx -lXext -lX11
+			$(CC) -Iinclude -c $< -o $@  -lmlx -lXext -lX11 -lm
 
 $(LIBFT):
 			make -C libft

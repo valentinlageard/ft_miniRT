@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:30 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/06 23:17:15 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/10 15:44:23 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parse_sphere(char *line, t_prog *prog)
 	words = ft_split(line, "\t ");
 	new_sph = new_sphere();
 	new_sph->pos = word_to_vector3(words[1]);
-	new_sph->radius = atof(words[2]);
+	new_sph->radius = atof(words[2]) / 2.0;
 	new_sph->color = word_to_color(words[3]);
 	push_back_sphere(&(prog->spheres), new_sph);
 	new_obj = new_object();

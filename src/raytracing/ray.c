@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.c                                           :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/06 17:49:02 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/13 16:06:01 by vlageard         ###   ########.fr       */
+/*   Created: 2020/03/10 15:35:14 by vlageard          #+#    #+#             */
+/*   Updated: 2020/03/10 15:41:12 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int main(int ac, char **av)
+t_ray	*new_ray(t_vec3 *origin, t_vec3 *dir)
 {
-	t_prog	*prog;
+	t_ray	*new_ray;
 
-	if (ac >= 2)
-	{
-		prog = init_prog();
-		// Check .rt
-		parse_file(av[1], prog);
-		init_win(prog->win_width, prog->win_height, prog);
-		compute_image(prog);
-		// Compute raytraced image
-		// Create window and print image
-		// Wait for instructions
-	}
-	while (1);
-	if (*av != 0)
-		return (0);
-	return (0);
+	if(!(new_ray = (t_ray *)malloc(sizeof(t_ray))))
+		return (NULL);
+	new_ray->orig = origin;
+	new_ray->dir = dir;
+	return(new_ray);
+}
+
+void	free_ray(t_ray *ray)
+{
+	free(ray->orig);
+	free(ray->dir);
+	free(ray);
 }

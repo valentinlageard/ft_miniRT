@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 18:34:42 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/06 18:56:19 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/13 16:15:39 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,19 @@ void	push_back_sphere(t_sphere **first_sphere, t_sphere *new_sphere)
 			tmp = tmp->next;
 		tmp->next = new_sphere;
 	}
+}
+
+double	intersect_sphere(t_ray *ray, t_sphere *sphere)
+{
+	t_vec3	*oc;
+	double	a;
+	double	b;
+	double	c;
+
+	oc = vec3_sub(ray->orig, sphere->pos);
+	a = vec3_dot(ray->dir, ray->dir);
+	b = 2 * vec3_dot(ray->dir,oc);
+	c = vec3_dot(oc, oc) - sphere->radius*sphere->radius;
+	free(oc);
+	return (get_min_quadratic_solution(a, b, c));
 }
