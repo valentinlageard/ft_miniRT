@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:48:15 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/13 17:51:35 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/14 17:59:52 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,12 @@ void	push_back_cam(t_cam **first_cam, t_cam *new_cam)
 
 void	compute_camera_projection(t_prog *prog)
 {
-	double	theta;
-	double	half_width;
-	double	half_height;
-	double	ratio;
+	double	inv_ratio;
 
-	theta = (double)(prog->current_cam->fov)*PI/180.0;
-	half_width = (double)(tan(theta/2));
-	ratio = ((double)(prog->win_width))/((double)(prog->win_height));
-	half_height = ratio * half_width;
-	prog->lower_left_corner = new_vec3(-half_width, -half_height, -1.0);
-	prog->horizontal = new_vec3(2 * half_width, 0.0, 0.0);
-	prog->vertical = new_vec3(0.0, 2 * half_height, 0.0);
+	printf("fov : %i\n", prog->current_cam->fov);
+	prog->half_width = (double)(tan((prog->current_cam->fov * (PI/180))/2.0));
+	printf("half_width : %f\n", prog->half_width);
+	inv_ratio = ((double)(prog->win_height))/((double)(prog->win_width));
+	prog->half_height = inv_ratio * prog->half_width;
+	printf("half_height : %f\n", prog->half_height);
 }

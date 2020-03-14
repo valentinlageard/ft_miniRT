@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/13 17:55:13 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/14 18:20:12 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <mlx.h>
 #include <math.h>
+#include <unistd.h>
 
 #include <stdio.h>
 
@@ -72,9 +73,8 @@ typedef struct		s_prog {
 	char			*img_pixels;
 	t_cam			*cams;
 	t_cam			*current_cam;
-	t_vec3			*lower_left_corner;
-	t_vec3			*horizontal;
-	t_vec3			*vertical;
+	double			half_width;
+	double			half_height;
 	t_object		*objects;
 	t_sphere		*spheres;
 	// lights
@@ -100,6 +100,8 @@ t_color				*word_to_color(char *word);
 
 // Vectors
 t_vec3				*new_vec3(double x, double y, double z);
+t_vec3				*vec3_cpy(t_vec3 *vec3);
+t_vec3				*vec3_normalize(t_vec3 *vec3);
 int					vec3_is_equal(t_vec3 *vec1, t_vec3 *vec2);
 t_vec3				*vec3_add(t_vec3 *vec1, t_vec3 *vec2);
 t_vec3				*vec3_sub(t_vec3 *vec1, t_vec3 *vec2);

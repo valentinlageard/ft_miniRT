@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:35:14 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/13 17:51:12 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/14 20:24:50 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,29 @@ void	free_ray(t_ray *ray)
 	free(ray);
 }
 
+t_vec3	*get_ray_dir(double u, double v, t_prog *prog)
+{
+	t_vec3	*p_pos;
+	t_vec3	*ray_direction;
+	t_vec3	*ray_direction_normalized;
+
+	p_pos = new_vec3((2*u-1)*prog->half_width, (1-2*v)*prog->half_height,-1);
+	ray_direction = vec3_sub(p_pos, prog->current_cam->pos);
+	ray_direction_normalized = vec3_normalize(ray_direction);
+	free(p_pos);
+	free(ray_direction);
+	return (ray_direction_normalized);
+}
+
 t_ray	*get_ray(int x, int y, t_prog *prog)
 {
 	t_ray	*ray;
 	double	u;
 	double	v;
-	double	dir_x;
-	double	dir_y;
-	double	dir_z;
-	t_vec3	*direction;
 
-	u = ((double)(x))/((double)(prog->win_width));
-	v = ((double)(y))/((double)(prog->win_height));
+	u = ((double)(x)+0.5)/((double)(prog->win_width));
+	v = ((double)(y)+0.5)/((double)(prog->win_height));
 	//printf("u : %f / v : %f\n", u, v);
-	dir_x = prog->lower_left_corner->x + u * prog->horizontal->x + v * prog->vertical->x - prog->current_cam->pos->x;
-	dir_y = prog->lower_left_corner->y + u * prog->horizontal->y + v * prog->vertical->y - prog->current_cam->pos->y;
-	dir_z = prog->lower_left_corner->z + u * prog->horizontal->z + v * prog->vertical->z - prog->current_cam->pos->z;
-	direction = new_vec3(dir_x, dir_y, dir_z);
-	//printf("dir_x : %f / dir_y : %f / dir_z : %f\n", dir_x, dir_y, dir_z);
-	ray = new_ray(new_vec3(prog->current_cam->pos->x, prog->current_cam->pos->y, prog->current_cam->pos->z), direction);
+	ray = new_ray(vec3_cpy(prog->current_cam->pos), get_ray_dir(u, v, prog));
 	return (ray);
 }

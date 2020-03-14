@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:42:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/13 18:03:39 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/14 20:19:42 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@ void	test_color(int x, int y, t_object *current_hit, t_prog *prog)
 		*(prog->img_pixels + ((y * prog->win_width) + x) * 4) = ((t_sphere *)(current_hit->object))->color->red;
 		*(prog->img_pixels + (((y * prog->win_width) + x) * 4) + 1) = ((t_sphere *)(current_hit->object))->color->green;
 		*(prog->img_pixels + (((y * prog->win_width) + x) * 4) + 2) = ((t_sphere *)(current_hit->object))->color->blue;
-		printf("pixel x%d y%d : r%d g%d b%d\n", x, y, ((t_sphere *)(current_hit->object))->color->red, ((t_sphere *)(current_hit->object))->color->green, ((t_sphere *)(current_hit->object))->color->blue);
-		//mlx_pixel_put(prog->mlx_ptr, prog->win_ptr, x, y, color(((t_sphere *)(current_hit->object))->color));
+		//printf("pixel x%04d y%04d : r%03d g%03d b%03d\n", x, y, ((t_sphere *)(current_hit->object))->color->red, ((t_sphere *)(current_hit->object))->color->green, ((t_sphere *)(current_hit->object))->color->blue);
 	}
 	else
 	{
 		*(prog->img_pixels + ((y * prog->win_width) + x) * 4) = 0;
 		*(prog->img_pixels + ((y * prog->win_width) + x + 1) * 4) = 0;
 		*(prog->img_pixels + ((y * prog->win_width) + x + 2) * 4) = 0;
-		//mlx_pixel_put(prog->mlx_ptr, prog->win_ptr, x, y, 0);
 	}
 }
 
@@ -47,7 +45,7 @@ t_object	*collide_ray(t_ray *ray, t_prog *prog)
 		//printf("obj->pos->z : %f\n",((t_sphere *)(tmp->object))->pos->z);
 		new_dist = intersect_sphere(ray, (t_sphere *)(tmp->object));
 		//printf("new_dist : %f\n", new_dist);
-		if (new_dist < dist && new_dist != -1.0)
+		if (new_dist < dist && ! (new_dist < 0))
 		{
 			dist = new_dist;
 			current_hit = tmp;
@@ -71,12 +69,6 @@ void	compute_image(t_prog *prog)
 	init_img(prog);
 	compute_camera_projection(prog);
 	printf("win_width : %i / win_height : %i\n", prog->win_width, prog->win_height);
-	printf("prog->lower_left_corner : ");
-	print_vec3(prog->lower_left_corner);
-	printf("prog->horizontal : ");
-	print_vec3(prog->horizontal);
-	printf("prog->vertical : ");
-	print_vec3(prog->vertical);
 	printf("----------------\n");
 	while (y < prog->win_height) // Pour chaque ligne
 	{
@@ -84,20 +76,19 @@ void	compute_image(t_prog *prog)
 		{	
 			//printf("----------------\n");
 			//printf("x : %i / y : %i\n", x, y);
+			//print_vec3(prog->current_cam->pos);
 			ray = get_ray(x, y, prog);
-			printf("ray->dir->x : %f / ray->dir->y : %f / ray->dir->z : %f\n", ray->dir->x, ray->dir->y, ray->dir->z);
 			current_hit = collide_ray(ray,prog);
 			free_ray(ray);
 			ray = NULL;
-			x++;
 			test_color(x, y, current_hit, prog);
+			x++;
 		}
 		y++;
 		x = 0;
 	}
 	printf("DONE\n");
 	mlx_put_image_to_window(prog->mlx_ptr, prog->win_ptr, prog->img_ptr, 0, 0);
-	printf("DONE 2\n");
 	mlx_destroy_image(prog->mlx_ptr, prog->img_ptr);
 }
 
