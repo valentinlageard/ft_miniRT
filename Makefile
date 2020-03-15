@@ -14,6 +14,7 @@ SRC			=	src/miniRT.c \
 				src/scene/sphere.c \
 				src/utils/vector.c \
 				src/utils/vector_maths.c \
+				src/utils/vector_rotation.c \
 				src/utils/solve_quadratic.c
 
 OBJS		=	$(SRC:.c=.o)

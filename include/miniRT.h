@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/14 18:20:12 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/15 17:07:30 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ t_vec3				*vec3_mul(t_vec3 *vec1, t_vec3 *vec2);
 t_vec3				*vec3_div(t_vec3 *vec1, t_vec3 *vec2);
 double				vec3_dot(t_vec3 *vec1, t_vec3 *vec2);
 void				print_vec3(t_vec3 *vec3);
+t_vec3				*vec3_rotateXYZ(t_vec3 *vec3, t_vec3 *ovec3);
 
 
 // Rays
@@ -120,7 +121,6 @@ t_ray				*get_ray(int x, int y, t_prog *prog);
 t_cam				*new_camera(void);
 void				push_back_cam(t_cam **first_cam, t_cam *new_cam);
 void				compute_camera_projection(t_prog *prog);
-
 
 // Object
 t_object			*new_object(void);

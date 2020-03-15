@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:35:14 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/15 02:15:07 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/15 18:02:55 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,36 @@ void	free_ray(t_ray *ray)
 	free(ray);
 }
 
-t_vec3	*get_ray_dir(double u, double v, t_prog *prog)
+t_vec3	*get_ray_dir_unoriented(double u, double v, t_prog *prog)
 {
 	t_vec3	*p_pos;
-	t_vec3	*ray_direction;
-	t_vec3	*ray_direction_normalized;
+	t_vec3	*ray_dir_unoriented;
+	t_vec3	*world_origin;
 
-	p_pos = new_vec3((2*u-1)*prog->half_width, (1-2*v)*prog->half_height,prog->current_cam->pos->z - 1);
-	ray_direction = vec3_sub(p_pos, prog->current_cam->pos);
-	ray_direction_normalized = vec3_normalize(ray_direction);
+	p_pos = new_vec3((2 * u - 1) * prog->half_width,
+	(1 - 2 * v) * prog->half_height,
+	-1);
+	world_origin = new_vec3(0,0,0);
+	ray_dir_unoriented = vec3_sub(p_pos, world_origin);
 	free(p_pos);
-	free(ray_direction);
-	return (ray_direction_normalized);
+	free(world_origin);
+	return (ray_dir_unoriented);
+}
+
+t_vec3	*get_ray_dir(double u, double v, t_prog *prog)
+{
+	t_vec3	*ray_dir_unoriented;
+	t_vec3	*ray_dir_normalized;
+	t_vec3	*cam_orientation;
+	t_vec3	*ray_dir_oriented;
+
+	ray_dir_unoriented = get_ray_dir_unoriented(u, v, prog);
+	ray_dir_normalized = vec3_normalize(ray_dir_unoriented);
+	cam_orientation = prog->current_cam->orientation;
+	ray_dir_oriented = vec3_rotateXYZ(ray_dir_normalized, cam_orientation);
+	free(ray_dir_unoriented);
+	free(ray_dir_normalized);
+	return (ray_dir_oriented);
 }
 
 t_ray	*get_ray(int x, int y, t_prog *prog)
