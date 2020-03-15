@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:49:02 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/13 16:06:01 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/14 22:23:02 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int main(int ac, char **av)
 	{
 		prog = init_prog();
 		// Check .rt
+		printf("---------------\nPARSING\n");
 		parse_file(av[1], prog);
+		printf("---------------\n");
 		init_win(prog->win_width, prog->win_height, prog);
 		compute_image(prog);
 		// Compute raytraced image

@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:42:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/14 20:19:42 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/14 22:28:19 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ void	compute_image(t_prog *prog)
 	init_img(prog);
 	compute_camera_projection(prog);
 	printf("win_width : %i / win_height : %i\n", prog->win_width, prog->win_height);
+	printf("cam->pos : ");
+	print_vec3(prog->current_cam->pos);
+	printf("cam->dir : ");
+	print_vec3(prog->current_cam->orientation);
+	printf("cam->fov : %i\n", prog->current_cam->fov);
 	printf("----------------\n");
 	while (y < prog->win_height) // Pour chaque ligne
 	{
@@ -78,6 +83,13 @@ void	compute_image(t_prog *prog)
 			//printf("x : %i / y : %i\n", x, y);
 			//print_vec3(prog->current_cam->pos);
 			ray = get_ray(x, y, prog);
+			if (x == 0 && y == 0)
+			{
+				printf("ray->orig : ");
+				print_vec3(ray->orig);
+				printf("ray->dir : ");
+				print_vec3(ray->dir);
+			}
 			current_hit = collide_ray(ray,prog);
 			free_ray(ray);
 			ray = NULL;

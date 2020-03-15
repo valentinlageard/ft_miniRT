@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:35:14 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/14 20:24:50 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/15 02:15:07 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_vec3	*get_ray_dir(double u, double v, t_prog *prog)
 	t_vec3	*ray_direction;
 	t_vec3	*ray_direction_normalized;
 
-	p_pos = new_vec3((2*u-1)*prog->half_width, (1-2*v)*prog->half_height,-1);
+	p_pos = new_vec3((2*u-1)*prog->half_width, (1-2*v)*prog->half_height,prog->current_cam->pos->z - 1);
 	ray_direction = vec3_sub(p_pos, prog->current_cam->pos);
 	ray_direction_normalized = vec3_normalize(ray_direction);
 	free(p_pos);
