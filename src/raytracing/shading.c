@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 17:06:22 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/23 16:43:45 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/23 17:24:52 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_vec3	*get_lambertian(t_light_p *lp, t_light *light)
 
 	lv = vec3_get_nvec3_between(light->pos, lp->hit_p);
 	illum = vec3_dot(lv, lp->normal) > 0 ? vec3_dot(lv, lp->normal) : 0;
+	illum = illum * light->intensity;
 	free(lv);
 	return (new_vec3(illum, illum, illum));
 }
@@ -99,7 +100,7 @@ t_vec3	*get_shading_point(t_ray *ray, t_object *object, t_prog *prog)
 	lp = get_light_p_object(ray, object);
 	light = prog->lights;
 	previous_vcolor = get_diffuse_color(lp, light, prog);
-	ambient_vcolor = new_vec3(0.15,0.15,0.15); // Récupérer la lumière ambiente de la scène
+	ambient_vcolor = new_vec3(0.05,0.05,0.05); // Récupérer la lumière ambiente de la scène
 	// Ambient + Diffuse
 	cumu_r_vcolor = vec3_add(previous_vcolor, ambient_vcolor);
 	free(previous_vcolor);
