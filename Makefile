@@ -9,11 +9,17 @@ SRC			=	src/miniRT.c \
 				src/raytracing/raytrace.c \
 				src/raytracing/ray.c \
 				src/raytracing/img_utils.c \
+				src/raytracing/shading.c \
+				src/raytracing/light_point.c \
 				src/scene/camera.c \
+				src/scene/light.c \
 				src/scene/object.c \
 				src/scene/sphere.c \
+				src/scene/sphere_maths.c \
+				src/utils/color.c \
 				src/utils/vector.c \
 				src/utils/vector_maths.c \
+				src/utils/vector_maths2.c \
 				src/utils/vector_rotation.c \
 				src/utils/solve_quadratic.c
 

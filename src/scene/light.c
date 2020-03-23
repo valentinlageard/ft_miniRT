@@ -1,38 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.c                                           :+:      :+:    :+:   */
+/*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/06 18:34:42 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/17 19:24:27 by vlageard         ###   ########.fr       */
+/*   Created: 2020/03/15 21:47:14 by vlageard          #+#    #+#             */
+/*   Updated: 2020/03/18 16:39:47 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_sphere	*new_sphere(void)
+t_light	*new_light(void)
 {
-	t_sphere	*new_sphere;
-	
-	if (!(new_sphere = (t_sphere *)malloc(sizeof(t_sphere))))
+	t_light *new_spot;
+	if (!(new_spot = (t_light *)malloc(sizeof(t_light))))
 		return (NULL);
-	new_sphere->next = NULL;
-	return(new_sphere);
+	new_spot->next = NULL;
+	return (new_spot);
 }
 
-void	push_back_sphere(t_sphere **first_sphere, t_sphere *new_sphere)
+void	push_back_light(t_light **first_light, t_light *new_light)
 {
-	t_sphere	*tmp;
+	t_light	*tmp;
 
-	if (*first_sphere == NULL)
-		*first_sphere = new_sphere;
+	if (*first_light == NULL)
+		*first_light = new_light;
 	else
 	{
-		tmp = *first_sphere;
+		tmp = *first_light;
 		while (tmp->next != NULL)
 			tmp = tmp->next;
-		tmp->next = new_sphere;
+		tmp->next = new_light;
 	}
+}
+
+int		len_lights(t_light *first_light)
+{
+	t_light	*tmp;
+	int		i;
+
+	tmp = first_light;
+	i = 0;
+	while (tmp->next)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
 }

@@ -6,11 +6,18 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:42:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/14 22:28:19 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/23 16:06:36 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+void	img_put_pixel(int x, int y, t_vec3 *vcolor, t_prog * prog)
+{
+	*(prog->img_pixels + ((y * prog->win_width) + x) * 4 + 2) = (int)(vcolor->x * 255);
+	*(prog->img_pixels + (((y * prog->win_width) + x) * 4) + 1) = (int)(vcolor->y * 255);
+	*(prog->img_pixels + (((y * prog->win_width) + x) * 4) + 0) = (int)(vcolor->z * 255);
+}
 
 void	test_color(int x, int y, t_object *current_hit, t_prog *prog)
 {
@@ -61,7 +68,10 @@ void	compute_image(t_prog *prog)
 	t_ray		*ray;
 	int			x;
 	int			y;
+	t_vec3		*p_color;
+	t_vec3		*black;
 
+	black = new_vec3(0,0,0);
 	printf("----------------\n");
 	printf("INITIALIZING\n");
 	x = 0;
@@ -75,30 +85,36 @@ void	compute_image(t_prog *prog)
 	print_vec3(prog->current_cam->orientation);
 	printf("cam->fov : %i\n", prog->current_cam->fov);
 	printf("----------------\n");
+	printf("light color : %dr %dg %db", prog->lights->color->red, prog->lights->color->green ,prog->lights->color->blue);
 	while (y < prog->win_height) // Pour chaque ligne
 	{
 		while (x < prog->win_width) // Pour chaque pixel dans cette ligne
 		{	
 			//printf("----------------\n");
 			//printf("x : %i / y : %i\n", x, y);
-			//print_vec3(prog->current_cam->pos);
 			ray = get_ray(x, y, prog);
-			if (x == 0 && y == 0)
-			{
-				printf("ray->orig : ");
-				print_vec3(ray->orig);
-				printf("ray->dir : ");
-				print_vec3(ray->dir);
-			}
+			//printf("ray->orig : ");
+			//print_vec3(ray->orig);
+			//printf("ray->dir : ");
+			//print_vec3(ray->dir);
 			current_hit = collide_ray(ray,prog);
+			if (!current_hit)
+				img_put_pixel(x, y, black, prog);
+			else
+			{
+				p_color = get_shading_point(ray, current_hit, prog);
+				//print_vec3(p_color);
+				img_put_pixel(x, y, p_color, prog);
+				free(p_color);
+			}
+			//test_color(x, y, current_hit, prog);
 			free_ray(ray);
-			ray = NULL;
-			test_color(x, y, current_hit, prog);
 			x++;
 		}
 		y++;
 		x = 0;
 	}
+	free(black);
 	printf("DONE\n");
 	mlx_put_image_to_window(prog->mlx_ptr, prog->win_ptr, prog->img_ptr, 0, 0);
 	mlx_destroy_image(prog->mlx_ptr, prog->img_ptr);

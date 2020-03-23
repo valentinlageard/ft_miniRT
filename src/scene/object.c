@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:17:25 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/06 23:37:13 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/18 00:22:54 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,12 @@ void	push_back_object(t_object **first_object, t_object *new_object)
 			tmp = tmp->next;
 		tmp->next = new_object;
 	}
+}
+
+t_light_p	*get_light_p_object(t_ray *ray, t_object *object)
+{
+	if (object->type == 's')
+		return (get_light_p_sphere(ray, object));
+	else
+		return (NULL);
 }

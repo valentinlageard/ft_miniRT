@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.c                                           :+:      :+:    :+:   */
+/*   light_point.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/07 15:23:23 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/15 20:00:23 by vlageard         ###   ########.fr       */
+/*   Created: 2020/03/17 19:18:55 by vlageard          #+#    #+#             */
+/*   Updated: 2020/03/18 00:18:03 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_vec3	*new_vec3(double x, double y, double z)
+t_light_p	*new_light_p(t_vec3 *hit_p, t_vec3 *normal, t_vec3 *vcolor)
 {
-	t_vec3	*new_vec3;
+	t_light_p	*new_light_point;
 
-	if (!(new_vec3 = (t_vec3 *)malloc(sizeof(t_vec3))))
+	if (!(new_light_point = (t_light_p *)malloc(sizeof(t_light_p))))
 		return (NULL);
-	new_vec3->x = x;
-	new_vec3->y = y;
-	new_vec3->z = z;
-	return (new_vec3);
-}
-
-t_vec3	*vec3_cpy(t_vec3 *vec3)
-{
-	return (new_vec3(vec3->x,vec3->y,vec3->z));
-}
-
-void	print_vec3(t_vec3 *vec3)
-{
-	printf("x : %f / y : %f / z : %f\n", vec3->x, vec3->y, vec3->z);
+	new_light_point->hit_p = hit_p;
+	new_light_point->normal = normal;
+	new_light_point->vcolor = vcolor;
+	return (new_light_point);
 }

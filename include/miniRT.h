@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/15 17:07:30 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/23 16:21:01 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,25 @@ typedef struct		s_ray {
 	t_vec3			*dir;
 }					t_ray;
 
+typedef struct		s_light_p {
+	t_vec3			*hit_p;
+	t_vec3			*normal;
+	t_vec3			*vcolor;
+}					t_light_p;
+
 typedef struct		s_cam {
 	t_vec3			*pos;
 	t_vec3			*orientation;
 	int				fov;
 	struct s_cam	*next;
 }					t_cam;
+
+typedef struct		s_light {
+	t_vec3			*pos;
+	double			intensity;
+	t_color			*color;
+	struct s_light	*next;
+}					t_light;
 
 typedef struct		s_object {
 	char			type;
@@ -75,9 +88,9 @@ typedef struct		s_prog {
 	t_cam			*current_cam;
 	double			half_width;
 	double			half_height;
+	t_light			*lights;
 	t_object		*objects;
 	t_sphere		*spheres;
-	// lights
 	// other objects : planes, triangles, etc...
 }					t_prog;
 
@@ -89,11 +102,14 @@ void				init_img(t_prog *prog);
 // Raytrace
 
 void				compute_image(t_prog *prog);
+t_vec3				*get_shading_point(t_ray *ray, t_object *object, t_prog *prog);
+
 
 // Parsing
 void				parse_file(char *filename, t_prog *prog);
 void				parse_resolution(char *line, t_prog *prog);
 void				parse_camera(char *line, t_prog *prog);
+void				parse_light(char *line, t_prog *prog);
 void				parse_sphere(char *line, t_prog *prog);
 t_vec3				*word_to_vector3(char *word);
 t_color				*word_to_color(char *word);
@@ -101,16 +117,28 @@ t_color				*word_to_color(char *word);
 // Vectors
 t_vec3				*new_vec3(double x, double y, double z);
 t_vec3				*vec3_cpy(t_vec3 *vec3);
-t_vec3				*vec3_normalize(t_vec3 *vec3);
-int					vec3_is_equal(t_vec3 *vec1, t_vec3 *vec2);
 t_vec3				*vec3_add(t_vec3 *vec1, t_vec3 *vec2);
 t_vec3				*vec3_sub(t_vec3 *vec1, t_vec3 *vec2);
 t_vec3				*vec3_mul(t_vec3 *vec1, t_vec3 *vec2);
 t_vec3				*vec3_div(t_vec3 *vec1, t_vec3 *vec2);
-double				vec3_dot(t_vec3 *vec1, t_vec3 *vec2);
-void				print_vec3(t_vec3 *vec3);
+t_vec3				*vec3_normalize(t_vec3 *vec3);
 t_vec3				*vec3_rotateXYZ(t_vec3 *vec3, t_vec3 *ovec3);
+int					vec3_is_equal(t_vec3 *vec1, t_vec3 *vec2);
+double				vec3_dot(t_vec3 *vec1, t_vec3 *vec2);
+double				vec3_magnitude(t_vec3 *vec3);
+double				vec3_cos_angle(t_vec3 *vec1, t_vec3 *vec2);
+t_vec3				*vec3_clamp(t_vec3 *vec, double max);
+double				vec3_get_distance(t_vec3 *vec1, t_vec3 *vec2);
+t_vec3				*vec3_get_nvec3_between(t_vec3 *vec1, t_vec3 *vec2);
+void				print_vec3(t_vec3 *vec3);
 
+// Light points
+t_light_p			*new_light_p(t_vec3 *hit_p, t_vec3 *normal, t_vec3 *vcolor);
+
+// Lights
+t_light				*new_light(void);
+void				push_back_light(t_light **first_light, t_light *new_light);
+int					len_lights(t_light *first_light);
 
 // Rays
 t_ray				*new_ray(t_vec3 *origin, t_vec3 *dir);
@@ -125,13 +153,18 @@ void				compute_camera_projection(t_prog *prog);
 // Object
 t_object			*new_object(void);
 void				push_back_object(t_object **first_object, t_object *new_object);
+t_light_p			*get_light_p_object(t_ray *ray, t_object *object);
 
 // Sphere
 t_sphere			*new_sphere(void);
 void				push_back_sphere(t_sphere **first_sphere, t_sphere *new_sphere);
 double				intersect_sphere(t_ray *ray, t_sphere *sphere);
+t_light_p			*get_light_p_sphere(t_ray *ray, t_object *object);
 
 // Utils
 double				get_min_quadratic_solution(double a, double b, double c);
+
+// Colors
+t_vec3				*coltovec3(t_color *color);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:35:14 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/15 18:02:55 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/03/18 01:29:50 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,14 @@ t_ray	*get_ray(int x, int y, t_prog *prog)
 	t_ray	*ray;
 	double	u;
 	double	v;
+	t_vec3	*cam_pos_cpy;
+	t_vec3	*ray_dir;
 
 	u = ((double)(x)+0.5)/((double)(prog->win_width));
 	v = ((double)(y)+0.5)/((double)(prog->win_height));
 	//printf("u : %f / v : %f\n", u, v);
-	ray = new_ray(vec3_cpy(prog->current_cam->pos), get_ray_dir(u, v, prog));
+	cam_pos_cpy = vec3_cpy(prog->current_cam->pos);
+	ray_dir = get_ray_dir(u, v, prog);
+	ray = new_ray(cam_pos_cpy, ray_dir);
 	return (ray);
 }
