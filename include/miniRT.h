@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/23 16:21:01 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/04 19:00:43 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,5 +166,11 @@ double				get_min_quadratic_solution(double a, double b, double c);
 
 // Colors
 t_vec3				*coltovec3(t_color *color);
+
+// Callbacks
+int                 key_callback(int k, int *param);
+
+// User actions
+void				change_camera(t_prog *prog);
 
 #endif

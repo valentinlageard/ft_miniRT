@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:42:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/23 16:06:36 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/04 19:14:31 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,6 @@ void	img_put_pixel(int x, int y, t_vec3 *vcolor, t_prog * prog)
 	*(prog->img_pixels + ((y * prog->win_width) + x) * 4 + 2) = (int)(vcolor->x * 255);
 	*(prog->img_pixels + (((y * prog->win_width) + x) * 4) + 1) = (int)(vcolor->y * 255);
 	*(prog->img_pixels + (((y * prog->win_width) + x) * 4) + 0) = (int)(vcolor->z * 255);
-}
-
-void	test_color(int x, int y, t_object *current_hit, t_prog *prog)
-{
-	if (current_hit)
-	{
-		*(prog->img_pixels + ((y * prog->win_width) + x) * 4) = ((t_sphere *)(current_hit->object))->color->red;
-		*(prog->img_pixels + (((y * prog->win_width) + x) * 4) + 1) = ((t_sphere *)(current_hit->object))->color->green;
-		*(prog->img_pixels + (((y * prog->win_width) + x) * 4) + 2) = ((t_sphere *)(current_hit->object))->color->blue;
-		//printf("pixel x%04d y%04d : r%03d g%03d b%03d\n", x, y, ((t_sphere *)(current_hit->object))->color->red, ((t_sphere *)(current_hit->object))->color->green, ((t_sphere *)(current_hit->object))->color->blue);
-	}
-	else
-	{
-		*(prog->img_pixels + ((y * prog->win_width) + x) * 4) = 0;
-		*(prog->img_pixels + ((y * prog->win_width) + x + 1) * 4) = 0;
-		*(prog->img_pixels + ((y * prog->win_width) + x + 2) * 4) = 0;
-	}
 }
 
 t_object	*collide_ray(t_ray *ray, t_prog *prog)
@@ -85,9 +68,11 @@ void	compute_image(t_prog *prog)
 	print_vec3(prog->current_cam->orientation);
 	printf("cam->fov : %i\n", prog->current_cam->fov);
 	printf("----------------\n");
-	printf("light color : %dr %dg %db", prog->lights->color->red, prog->lights->color->green ,prog->lights->color->blue);
+	printf("light color : %dr %dg %db\n", prog->lights->color->red, prog->lights->color->green ,prog->lights->color->blue);
 	while (y < prog->win_height) // Pour chaque ligne
 	{
+		if (y % 10 == 0)
+        	printf("line n°%d/%d\n", y, prog->win_width - 1);
 		while (x < prog->win_width) // Pour chaque pixel dans cette ligne
 		{	
 			//printf("----------------\n");

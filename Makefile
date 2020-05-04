@@ -2,6 +2,8 @@ LIBFT		=	libft/libft.a
 NAME		=	miniRT
 SRC			=	src/miniRT.c \
 				src/init.c \
+				src/interactions/callbacks.c \
+				src/interactions/user_actions.c \
 				src/parsing/parse_file.c \
 				src/parsing/parse_scene.c \
 				src/parsing/parsing_utils.c \
