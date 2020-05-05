@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:49:02 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/04 19:12:34 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/05 19:37:17 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,17 @@ int main(int ac, char **av)
 
 	if (ac >= 2)
 	{
+		printf("Program initialization\n");
 		prog = init_prog();
 		// Check .rt
-		printf("---------------\nPARSING\n");
+		printf("Parsing\n");
 		parse_file(av[1], prog);
-		printf("---------------\n");
+		printf("Window initialization\n");
 		init_win(prog->win_width, prog->win_height, prog);
 		compute_image(prog);
-		printf("prog : %p\n", prog);
-		printf("&prog : %p\n", &prog);
-        mlx_key_hook(prog->win_ptr, key_callback, prog);
-        mlx_loop(prog->mlx_ptr);
+		mlx_key_hook(prog->win_ptr, key_callback, prog);
+		mlx_loop(prog->mlx_ptr);
 	}
-	//while (1);
 	if (*av != 0)
 		return (0);
 	return (0);

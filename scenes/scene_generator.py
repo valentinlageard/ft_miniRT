@@ -1,46 +1,73 @@
-import random
+from random import *
+from vectormath import *
+from math import *
 
-lines = []
+# Resolution
+xres = 600
+yres = 600
 
-spheres_n = 20
-lights_n = 10
+# Numbers of cameras, lights and objects
+ncams = 10
+nlights = 10
+nspheres = 25
 
-lines.append("R\t1000\t1000") # Add resolution
-lines.append("c\t0.0,0.0,20.0\t0.0,0.0,0.0\t90") # Add camera
+# Generators utilities
 
-def gen_pos():
-    x = str(round(random.uniform(-20,20), 2))
-    y = str(round(random.uniform(-20,20), 2))
-    z = str(round(random.uniform(-20, -1), 2))
+def gen_pos(bias=0):
+    x = str(round(uniform(-20-bias, 20+bias), 2))
+    y = str(round(uniform(-20-bias, 20+bias), 2))
+    z = str(round(uniform(-20-bias, 20+bias), 2))
     return (x + "," + y + "," + z)
 
 def gen_normvec():
-    return (",".join([str(random.random() * 2 - 1) for i in range(3)]))
+    return (",".join([str(random() * 2 - 1) for i in range(3)]))
 
 def gen_color():
-    return (",".join([str(random.randrange(0,256)) for i in range(3)]))
+    return (",".join([str(randrange(0,256)) for i in range(3)]))
 
 def gen_sp():
     sp_line = ["sp"]
     sp_line.append(gen_pos())
-    sp_line.append(str(round(random.uniform(0.5,5), 2)))
+    sp_line.append(str(round(uniform(0.5,5), 2)))
     sp_line.append(gen_color())
     return ("\t\t\t".join(sp_line))
 
 def gen_light():
     l_line = ["l"]
-    l_line.append(gen_pos())
-    l_line.append(str(round(random.random(),2)))
+    l_line.append(gen_pos(20))
+    l_line.append(str(round(random(),2)))
     l_line.append(gen_color())
     return ("\t\t\t".join(l_line))
 
-for i in range(spheres_n):
-    lines.append(gen_sp())
+def gen_cam():
+	c_line = ["c"]
+	from_center = Vector3(round(random() * 2 - 1, 2),round(random() * 2 - 1, 2),round(random() * 2 - 1, 2))
+	to_center = from_center * -1
+	from_center.normalize()
+	from_center *= 40
+	c_line.append(str(round(from_center.x, 2)) + "," + str(round(from_center.y, 2)) + "," + str(round(from_center.z, 2)))
+	c_line.append(str(to_center.x) + "," + str(to_center.y) + "," + str(to_center.z))
+	c_line.append("90")
+	return ("\t\t\t".join(c_line))
 
-for i in range(lights_n):
+
+# Script
+lines = []
+# Add resolution
+lines.append("R\t" + str(xres) + "\t" + str(yres))
+# Add cameras
+lines.append("c\t\t\t0.0,0.0,40.0\t\t\t0.0,0.0,0.0\t\t\t90")
+if ncams > 1:
+	for i in range(ncams - 1):
+		lines.append(gen_cam())
+# Append spheres
+for i in range(nspheres):
+    lines.append(gen_sp())
+# Append lights
+for i in range(nlights):
     lines.append(gen_light())
 
-# Write result in random.rt
+# Write the result in random.rt
 file = open("random.rt", "w")
 file.write("\n".join(lines))
 file.close()

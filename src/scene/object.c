@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:17:25 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/18 00:22:54 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/05 19:35:00 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,22 @@ void	push_back_object(t_object **first_object, t_object *new_object)
 	}
 }
 
+double		intersect_object(t_ray *ray, t_object *object)
+{
+	if (object->type == 's')
+		return (intersect_sphere(ray, (t_sphere *)object->object));
+	else if (object->type == 'p')
+		return (intersect_plane(ray, (t_plane *)object->object));
+	else
+		return (1000.0);
+}
+
 t_light_p	*get_light_p_object(t_ray *ray, t_object *object)
 {
 	if (object->type == 's')
 		return (get_light_p_sphere(ray, object));
+	else if (object->type == 'p')
+		return (get_light_p_plane(ray, object));
 	else
 		return (NULL);
 }

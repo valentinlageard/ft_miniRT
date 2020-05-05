@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 17:06:22 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/04 17:37:13 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/05 19:25:01 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ t_vec3	*get_lambertian(t_light_p *lp, t_light *light)
 	double	illum;
 
 	lv = vec3_get_nvec3_between(light->pos, lp->hit_p);
-	illum = vec3_dot(lv, lp->normal) > 0 ? vec3_dot(lv, lp->normal) : 0;
+	illum = vec3_dot(lv, lp->normal) > 0.0 ? vec3_dot(lv, lp->normal) : 0.0;
 	illum = illum * light->intensity;
 	free(lv);
 	return (new_vec3(illum, illum, illum));
 }
 
-int		check_shadow(t_ray *shadow_ray, t_light *light, t_prog *prog)
+int		check_shadow(t_ray *shadow_ray, t_light *light, t_object *object, t_prog *prog)
 {
 	t_object	*tmp;
 	double		dist;
@@ -34,10 +34,12 @@ int		check_shadow(t_ray *shadow_ray, t_light *light, t_prog *prog)
 	dist = vec3_get_distance(shadow_ray->orig, light->pos);
 	while (tmp)
 	{
-		// A changer pour gérer tous les types d'objets
-		new_dist = intersect_sphere(shadow_ray, (t_sphere *)(tmp->object));
-		if (new_dist < dist && !(new_dist < 0))
+		if (tmp != object)
+		{
+			new_dist = intersect_object(shadow_ray, tmp);
+			if (new_dist < dist && !(new_dist < 0))
 			return (1);
+		}
 		tmp = tmp->next;
 	}
 	return (0);
@@ -78,8 +80,8 @@ t_vec3	*get_diffuse_shading(t_light_p *lp, t_prog *prog)
 	while (light)
 	{
 		shadow_ray = new_ray(vec3_cpy(lp->hit_p), vec3_get_nvec3_between(light->pos, lp->hit_p));
-		if (!check_shadow(shadow_ray, light, prog))
-		      fill_diffuse_color(lp, light, &cumu_r_vcolor, &previous_vcolor);
+		if (!check_shadow(shadow_ray, light, lp->object, prog))
+			fill_diffuse_color(lp, light, &cumu_r_vcolor, &previous_vcolor);
 		free_ray(shadow_ray);
 		light = light->next;
 	}
@@ -113,5 +115,6 @@ t_vec3	*get_shading_point(t_ray *ray, t_object *object, t_prog *prog)
 	previous_vcolor = cumu_r_vcolor;
 	// Clamp to avoid artifacts
 	cumu_r_vcolor = vec3_clamp(previous_vcolor, 1.0);
+	free(previous_vcolor);
 	return (cumu_r_vcolor);
 }

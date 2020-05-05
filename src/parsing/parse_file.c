@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:36 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/16 03:09:30 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/05 17:33:09 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	parse_line(char *line, t_prog *prog) {
 		if (line[1] == 'p')
 			parse_sphere(line, prog);
 	}
+	else if (line[0] == 'p' && line[1] == 'l')
+		parse_plane(line, prog);
 }
 
 void	parse_file(char *filename, t_prog *prog)

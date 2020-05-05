@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/04 19:00:43 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/05 19:21:56 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct		s_color {
 	int				blue;
 } 					t_color;
 
+typedef struct		s_object {
+	char			type;
+	void			*object;
+	struct s_object	*next;
+}					t_object;
+
 typedef struct		s_ray {
 	t_vec3			*orig;
 	t_vec3			*dir;
@@ -48,6 +54,7 @@ typedef struct		s_light_p {
 	t_vec3			*hit_p;
 	t_vec3			*normal;
 	t_vec3			*vcolor;
+	t_object		*object;
 }					t_light_p;
 
 typedef struct		s_cam {
@@ -64,18 +71,19 @@ typedef struct		s_light {
 	struct s_light	*next;
 }					t_light;
 
-typedef struct		s_object {
-	char			type;
-	void			*object;
-	struct s_object	*next;
-}					t_object;
-
 typedef struct		s_sphere {
 	t_vec3			*pos;
 	double			radius;
 	t_color			*color;
 	struct s_sphere	*next;
 }					t_sphere;
+
+typedef struct		s_plane {
+	t_vec3			*pos;
+	t_vec3			*orientation;
+	t_color			*color;
+	struct s_plane	*next;
+}					t_plane;
 
 typedef struct		s_prog {
 	void			*mlx_ptr;
@@ -91,6 +99,7 @@ typedef struct		s_prog {
 	t_light			*lights;
 	t_object		*objects;
 	t_sphere		*spheres;
+	t_plane			*planes;
 	// other objects : planes, triangles, etc...
 }					t_prog;
 
@@ -111,6 +120,7 @@ void				parse_resolution(char *line, t_prog *prog);
 void				parse_camera(char *line, t_prog *prog);
 void				parse_light(char *line, t_prog *prog);
 void				parse_sphere(char *line, t_prog *prog);
+void				parse_plane(char *line, t_prog *prog);
 t_vec3				*word_to_vector3(char *word);
 t_color				*word_to_color(char *word);
 
@@ -133,7 +143,7 @@ t_vec3				*vec3_get_nvec3_between(t_vec3 *vec1, t_vec3 *vec2);
 void				print_vec3(t_vec3 *vec3);
 
 // Light points
-t_light_p			*new_light_p(t_vec3 *hit_p, t_vec3 *normal, t_vec3 *vcolor);
+t_light_p			*new_light_p(t_vec3 *hit_p, t_vec3 *normal, t_vec3 *vcolor, t_object *object);
 
 // Lights
 t_light				*new_light(void);
@@ -153,13 +163,21 @@ void				compute_camera_projection(t_prog *prog);
 // Object
 t_object			*new_object(void);
 void				push_back_object(t_object **first_object, t_object *new_object);
+double				intersect_object(t_ray *ray, t_object *object);
 t_light_p			*get_light_p_object(t_ray *ray, t_object *object);
+
 
 // Sphere
 t_sphere			*new_sphere(void);
 void				push_back_sphere(t_sphere **first_sphere, t_sphere *new_sphere);
 double				intersect_sphere(t_ray *ray, t_sphere *sphere);
 t_light_p			*get_light_p_sphere(t_ray *ray, t_object *object);
+
+// Plane
+t_plane				*new_pl(void);
+void				push_back_plane(t_plane **first_plane, t_plane *new_plane);
+double				intersect_plane(t_ray *ray, t_plane *plane);
+t_light_p			*get_light_p_plane(t_ray *ray, t_object *object);
 
 // Utils
 double				get_min_quadratic_solution(double a, double b, double c);

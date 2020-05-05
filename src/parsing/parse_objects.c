@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:30 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/14 20:28:09 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/05 19:30:48 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,29 @@ void	parse_sphere(char *line, t_prog *prog)
 	words = ft_split(line, "\t ");
 	new_sph = new_sphere();
 	new_sph->pos = word_to_vector3(words[1]);
-	printf("sp->pos : ");
-	print_vec3(new_sph->pos);
 	new_sph->radius = atof(words[2]) / 2.0;
-	printf("sp->radius : %f\n", new_sph->radius);
 	new_sph->color = word_to_color(words[3]);
-	printf("sp->color : r%i g%i b%i\n", new_sph->color->red,new_sph->color->green,new_sph->color->blue);
 	push_back_sphere(&(prog->spheres), new_sph);
 	new_obj = new_object();
 	new_obj->type = 's';
 	new_obj->object = new_sph;
+	push_back_object(&(prog->objects), new_obj);
+}
+
+void	parse_plane(char *line, t_prog *prog)
+{
+	char		**words;
+	t_plane		*new_plane;
+	t_object	*new_obj;
+
+	words = ft_split(line, "\t ");
+	new_plane = new_pl();
+	new_plane->pos = word_to_vector3(words[1]);
+	new_plane->orientation = word_to_vector3(words[2]);
+	new_plane->color = word_to_color(words[3]);
+	push_back_plane(&(prog->planes), new_plane);
+	new_obj = new_object();
+	new_obj->type = 'p';
+	new_obj->object = new_plane;
 	push_back_object(&(prog->objects), new_obj);
 }

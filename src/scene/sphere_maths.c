@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:24:30 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/18 00:24:39 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/05 19:37:05 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,23 @@ t_vec3	*get_normal_sphere(t_vec3 *hit_p, t_sphere *sphere)
 	t_vec3	*normal;
 
 	tmp = vec3_sub(hit_p, sphere->pos);
+	// Sphere interior ?
 	normal = vec3_normalize(tmp);
 	free(tmp);
 	return (normal);
 }
 
-t_light_p	*get_light_p_sphere(t_ray *ray, t_object *object)
+t_light_p	*get_light_p_sphere(t_ray *ray, t_object *obj)
 {
 	t_sphere	*sphere;
 	t_vec3		*hit_point;
 	t_vec3		*normal;
 	t_vec3		*vcolor;
 
-	sphere = (t_sphere *)(object->object);
+	sphere = (t_sphere *)obj->object;
 	hit_point = get_hit_point_sphere(ray, sphere);
 	normal = get_normal_sphere(hit_point, sphere);
 	vcolor = coltovec3(sphere->color);
-	return (new_light_p(hit_point, normal, vcolor));
+	return (new_light_p(hit_point, normal, vcolor, obj));
 }
 

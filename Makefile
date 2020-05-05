@@ -18,6 +18,8 @@ SRC			=	src/miniRT.c \
 				src/scene/object.c \
 				src/scene/sphere.c \
 				src/scene/sphere_maths.c \
+				src/scene/plane.c \
+				src/scene/plane_maths.c \
 				src/utils/color.c \
 				src/utils/vector.c \
 				src/utils/vector_maths.c \

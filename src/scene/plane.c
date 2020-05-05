@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light_point.c                                      :+:      :+:    :+:   */
+/*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/17 19:18:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/05 19:18:21 by vlageard         ###   ########.fr       */
+/*   Created: 2020/05/05 16:06:31 by vlageard          #+#    #+#             */
+/*   Updated: 2020/05/05 16:16:07 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_light_p	*new_light_p(t_vec3 *hit_p, t_vec3 *normal, t_vec3 *vcolor, t_object *object)
+t_plane	*new_pl(void)
 {
-	t_light_p	*new_light_point;
-
-	if (!(new_light_point = (t_light_p *)malloc(sizeof(t_light_p))))
+	t_plane	*new_plane;
+	
+	if (!(new_plane = (t_plane *)malloc(sizeof(t_plane))))
 		return (NULL);
-	new_light_point->hit_p = hit_p;
-	new_light_point->normal = normal;
-	new_light_point->vcolor = vcolor;
-	new_light_point->object = object;
-	return (new_light_point);
+	new_plane->next = NULL;
+	return(new_plane);
+}
+
+void	push_back_plane(t_plane **first_plane, t_plane *new_plane)
+{
+	t_plane	*tmp;
+
+	if (*first_plane == NULL)
+		*first_plane = new_plane;
+	else
+	{
+		tmp = *first_plane;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new_plane;
+	}
 }

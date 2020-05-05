@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:48:12 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/14 17:56:57 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/05 16:12:19 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_prog	*init_prog(void)
 	prog->half_width = 0.0;
 	prog->objects = NULL;
 	prog->spheres = NULL;
+	prog->planes = NULL;
 	return(prog);
 }
 
