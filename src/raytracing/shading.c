@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 17:06:22 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/05 19:25:01 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/11 15:29:07 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		check_shadow(t_ray *shadow_ray, t_light *light, t_object *object, t_prog *p
 		{
 			new_dist = intersect_object(shadow_ray, tmp);
 			if (new_dist < dist && !(new_dist < 0))
-			return (1);
+				return (1);
 		}
 		tmp = tmp->next;
 	}
@@ -103,7 +103,7 @@ t_vec3	*get_shading_point(t_ray *ray, t_object *object, t_prog *prog)
 	ambient_vcolor = NULL;
 	lp = get_light_p_object(ray, object);
 	previous_vcolor = get_diffuse_shading(lp, prog);
-	ambient_vcolor = new_vec3(0.05,0.05,0.05); // Récupérer la lumière ambiente de la scène
+	ambient_vcolor = get_ambient(prog->ambient_color, prog->ambient_intensity);
 	// Ambient + Diffuse
 	cumu_r_vcolor = vec3_add(previous_vcolor, ambient_vcolor);
 	free(previous_vcolor);

@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:42:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/05 19:36:14 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/11 15:27:03 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_object	*collide_ray(t_ray *ray, t_prog *prog)
 	while (tmp != NULL)
 	{
 		new_dist = intersect_object(ray, tmp);
-		if (new_dist < dist && ! (new_dist < 0))
+		if (new_dist < dist && !(new_dist < 0))
 		{
 			dist = new_dist;
 			current_hit = tmp;

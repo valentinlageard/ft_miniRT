@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:48:12 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/05 16:12:19 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/11 15:09:22 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_prog	*init_prog(void)
 	prog->current_cam = NULL;
 	prog->half_height = 0.0;
 	prog->half_width = 0.0;
+	prog->ambient_intensity = 0.0;
+	prog->ambient_color = NULL;
 	prog->objects = NULL;
 	prog->spheres = NULL;
 	prog->planes = NULL;

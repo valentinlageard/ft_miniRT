@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/05 19:21:56 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/11 15:24:16 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ typedef struct		s_prog {
 	t_cam			*current_cam;
 	double			half_width;
 	double			half_height;
+	double			ambient_intensity;
+	t_color			*ambient_color;
 	t_light			*lights;
 	t_object		*objects;
 	t_sphere		*spheres;
@@ -113,7 +115,6 @@ void				init_img(t_prog *prog);
 void				compute_image(t_prog *prog);
 t_vec3				*get_shading_point(t_ray *ray, t_object *object, t_prog *prog);
 
-
 // Parsing
 void				parse_file(char *filename, t_prog *prog);
 void				parse_resolution(char *line, t_prog *prog);
@@ -121,6 +122,7 @@ void				parse_camera(char *line, t_prog *prog);
 void				parse_light(char *line, t_prog *prog);
 void				parse_sphere(char *line, t_prog *prog);
 void				parse_plane(char *line, t_prog *prog);
+void				parse_ambient(char *line, t_prog *prog);
 t_vec3				*word_to_vector3(char *word);
 t_color				*word_to_color(char *word);
 
@@ -184,6 +186,7 @@ double				get_min_quadratic_solution(double a, double b, double c);
 
 // Colors
 t_vec3				*coltovec3(t_color *color);
+t_vec3				*get_ambient(t_color *color, double intensity);
 
 // Callbacks
 int                 key_callback(int k, int *param);

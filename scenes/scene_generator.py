@@ -2,16 +2,20 @@ from random import *
 from vectormath import *
 from math import *
 
+# Script parameters
+# =================
+
 # Resolution
-xres = 600
-yres = 600
+xres = 900
+yres = 900
 
 # Numbers of cameras, lights and objects
 ncams = 10
-nlights = 10
-nspheres = 25
+nlights = 12
+nspheres = 200
 
 # Generators utilities
+# ====================
 
 def gen_pos(bias=0):
     x = str(round(uniform(-20-bias, 20+bias), 2))
@@ -28,7 +32,7 @@ def gen_color():
 def gen_sp():
     sp_line = ["sp"]
     sp_line.append(gen_pos())
-    sp_line.append(str(round(uniform(0.5,5), 2)))
+    sp_line.append(str(round(uniform(0.5,3), 2)))
     sp_line.append(gen_color())
     return ("\t\t\t".join(sp_line))
 
@@ -50,13 +54,16 @@ def gen_cam():
 	c_line.append("90")
 	return ("\t\t\t".join(c_line))
 
+# Script
+# ======
 
-# Script
 lines = []
 # Add resolution
 lines.append("R\t" + str(xres) + "\t" + str(yres))
+# Add ambient
+lines.append("A\t" + str(0.1) + "\t" + "255,255,255")
 # Add cameras
-lines.append("c\t\t\t0.0,0.0,40.0\t\t\t0.0,0.0,0.0\t\t\t90")
+lines.append("c\t\t\t0.0,0.0,50.0\t\t\t0.0,0.0,0.0\t\t\t90")
 if ncams > 1:
 	for i in range(ncams - 1):
 		lines.append(gen_cam())
@@ -66,6 +73,11 @@ for i in range(nspheres):
 # Append lights
 for i in range(nlights):
     lines.append(gen_light())
+# Append planes
+lines.append("pl\t0.0,-40.0,0.0 0.5,0.0,0.0 150,150,150")
+lines.append("pl\t0.0,40.0,0.0 -0.5,0.0,0.0 75,150,75")
+lines.append("pl\t-40.0,0.0,0.0 0.0,-0.5,0.0 150,75,75")
+lines.append("pl\t40.0,0.0,0.0 0.0,0.5,0.0 75,75,150")
 
 # Write the result in random.rt
 file = open("random.rt", "w")

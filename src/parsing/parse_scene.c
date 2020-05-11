@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:43 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/15 21:46:59 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/11 15:28:27 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ void	parse_camera(char *line, t_prog *prog)
 	if (!prog->current_cam)
 		prog->current_cam = new_cam;
 	push_back_cam(&(prog->cams), new_cam);
+	free(words);
+}
+
+void parse_ambient(char *line, t_prog *prog)
+{
+	char	**words;
+
+	words = ft_split(line, "\t ");
+	prog->ambient_intensity = ft_atof(words[1]);
+	prog->ambient_color = word_to_color(words[2]);
 	free(words);
 }
 

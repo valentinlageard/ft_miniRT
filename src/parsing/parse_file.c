@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:36 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/05 17:33:09 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/11 15:12:04 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	parse_line(char *line, t_prog *prog) {
 	if (line[0] == 'R')
 		parse_resolution(line, prog);
+	else if (line[0] == 'A')
+		parse_ambient(line, prog);
 	else if (line[0] == 'c')
 		parse_camera(line, prog);
 	else if (line[0] == 'l')

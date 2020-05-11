@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:30 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/05 19:30:48 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/11 15:11:34 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	parse_sphere(char *line, t_prog *prog)
 	new_obj->type = 's';
 	new_obj->object = new_sph;
 	push_back_object(&(prog->objects), new_obj);
+	free(words);
 }
 
 void	parse_plane(char *line, t_prog *prog)
@@ -46,4 +47,5 @@ void	parse_plane(char *line, t_prog *prog)
 	new_obj->type = 'p';
 	new_obj->object = new_plane;
 	push_back_object(&(prog->objects), new_obj);
+	free(words);
 }
