@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/15 19:59:45 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/23 16:20:46 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/12 03:16:05 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,18 @@ t_vec3	*vec3_get_nvec3_between(t_vec3 *vec1, t_vec3 *vec2)
 	result = vec3_normalize(tmp);
 	free(tmp);
 	return (result);
+}
+
+t_vec3	*vec3_cross(t_vec3 *vec1, t_vec3 *vec2)
+{
+	t_vec3	*cross;
+	double	x;
+	double	y;
+	double	z;
+
+	x = vec1->y * vec2->z - vec1->z * vec2->y;
+	y = vec1->z * vec2->x - vec1->x * vec2->z;
+	z = vec1->x * vec2->y - vec1->y * vec2->x;
+	cross = new_vec3(x, y, z);
+	return (cross);
 }

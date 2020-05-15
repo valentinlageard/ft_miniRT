@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/11 15:24:16 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/12 04:48:37 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,14 @@ typedef struct		s_plane {
 	struct s_plane	*next;
 }					t_plane;
 
+typedef struct		s_tri {
+	t_vec3			*a;
+	t_vec3			*b;
+	t_vec3			*c;
+	t_color			*color;
+	struct s_tri	*next;
+}					t_tri;
+
 typedef struct		s_prog {
 	void			*mlx_ptr;
 	void			*win_ptr;
@@ -102,7 +110,8 @@ typedef struct		s_prog {
 	t_object		*objects;
 	t_sphere		*spheres;
 	t_plane			*planes;
-	// other objects : planes, triangles, etc...
+	t_tri			*triangles;
+	// other objects : cylinder, quad
 }					t_prog;
 
 // General
@@ -118,11 +127,13 @@ t_vec3				*get_shading_point(t_ray *ray, t_object *object, t_prog *prog);
 // Parsing
 void				parse_file(char *filename, t_prog *prog);
 void				parse_resolution(char *line, t_prog *prog);
+void				parse_ambient(char *line, t_prog *prog);
 void				parse_camera(char *line, t_prog *prog);
 void				parse_light(char *line, t_prog *prog);
 void				parse_sphere(char *line, t_prog *prog);
 void				parse_plane(char *line, t_prog *prog);
-void				parse_ambient(char *line, t_prog *prog);
+void				parse_triangle(char *line, t_prog *prog);
+
 t_vec3				*word_to_vector3(char *word);
 t_color				*word_to_color(char *word);
 
@@ -135,14 +146,15 @@ t_vec3				*vec3_mul(t_vec3 *vec1, t_vec3 *vec2);
 t_vec3				*vec3_div(t_vec3 *vec1, t_vec3 *vec2);
 t_vec3				*vec3_normalize(t_vec3 *vec3);
 t_vec3				*vec3_rotateXYZ(t_vec3 *vec3, t_vec3 *ovec3);
+t_vec3				*vec3_clamp(t_vec3 *vec, double max);
+t_vec3				*vec3_get_nvec3_between(t_vec3 *vec1, t_vec3 *vec2);
+t_vec3				*vec3_cross(t_vec3 *vec1, t_vec3 *vec2);
 int					vec3_is_equal(t_vec3 *vec1, t_vec3 *vec2);
 double				vec3_dot(t_vec3 *vec1, t_vec3 *vec2);
 double				vec3_magnitude(t_vec3 *vec3);
 double				vec3_cos_angle(t_vec3 *vec1, t_vec3 *vec2);
-t_vec3				*vec3_clamp(t_vec3 *vec, double max);
 double				vec3_get_distance(t_vec3 *vec1, t_vec3 *vec2);
-t_vec3				*vec3_get_nvec3_between(t_vec3 *vec1, t_vec3 *vec2);
-void				print_vec3(t_vec3 *vec3);
+void				print_vec3(t_vec3 *vec3); // To remove
 
 // Light points
 t_light_p			*new_light_p(t_vec3 *hit_p, t_vec3 *normal, t_vec3 *vcolor, t_object *object);
@@ -168,7 +180,6 @@ void				push_back_object(t_object **first_object, t_object *new_object);
 double				intersect_object(t_ray *ray, t_object *object);
 t_light_p			*get_light_p_object(t_ray *ray, t_object *object);
 
-
 // Sphere
 t_sphere			*new_sphere(void);
 void				push_back_sphere(t_sphere **first_sphere, t_sphere *new_sphere);
@@ -180,6 +191,12 @@ t_plane				*new_pl(void);
 void				push_back_plane(t_plane **first_plane, t_plane *new_plane);
 double				intersect_plane(t_ray *ray, t_plane *plane);
 t_light_p			*get_light_p_plane(t_ray *ray, t_object *object);
+
+// Triangles
+t_tri				*new_tri(void);
+void				push_back_tri(t_tri **first_tri, t_tri *new_tri);
+double				intersect_tri(t_ray *ray, t_tri *tri);
+t_light_p			*get_light_p_tri(t_ray *ray, t_object *obj);
 
 // Utils
 double				get_min_quadratic_solution(double a, double b, double c);

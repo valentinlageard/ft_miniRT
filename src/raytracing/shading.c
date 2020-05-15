@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 17:06:22 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/11 15:29:07 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/14 17:43:56 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		check_shadow(t_ray *shadow_ray, t_light *light, t_object *object, t_prog *p
 		if (tmp != object)
 		{
 			new_dist = intersect_object(shadow_ray, tmp);
-			if (new_dist < dist && !(new_dist < 0))
+			if (new_dist < dist && new_dist > 0)
 				return (1);
 		}
 		tmp = tmp->next;

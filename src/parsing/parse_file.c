@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:36 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/11 15:12:04 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/12 02:53:46 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	parse_line(char *line, t_prog *prog) {
 	}
 	else if (line[0] == 'p' && line[1] == 'l')
 		parse_plane(line, prog);
+	else if (line[0] == 't' && line[1] == 'r')
+		parse_triangle(line, prog);
 }
 
 void	parse_file(char *filename, t_prog *prog)

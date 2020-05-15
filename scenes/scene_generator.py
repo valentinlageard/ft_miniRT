@@ -10,9 +10,10 @@ xres = 900
 yres = 900
 
 # Numbers of cameras, lights and objects
-ncams = 10
-nlights = 12
-nspheres = 200
+ncams = 1
+nlights = 5
+nspheres = 0
+ntris = 100
 
 # Generators utilities
 # ====================
@@ -54,6 +55,17 @@ def gen_cam():
 	c_line.append("90")
 	return ("\t\t\t".join(c_line))
 
+def gen_triangle():
+	t_line = ["tr"]
+	A = [round(uniform(-20, 20), 2) for i in range(3)]
+	t_line.append(",".join([str(x) for x in A]))
+	B = [a + uniform(-5,5) for a in A]
+	t_line.append(",".join([str(x) for x in B]))
+	C = [a + uniform(-5,5) for a in A]
+	t_line.append(",".join([str(x) for x in C]))
+	t_line.append(gen_color())
+	return ("\t\t\t".join(t_line))
+
 # Script
 # ======
 
@@ -78,6 +90,9 @@ lines.append("pl\t0.0,-40.0,0.0 0.5,0.0,0.0 150,150,150")
 lines.append("pl\t0.0,40.0,0.0 -0.5,0.0,0.0 75,150,75")
 lines.append("pl\t-40.0,0.0,0.0 0.0,-0.5,0.0 150,75,75")
 lines.append("pl\t40.0,0.0,0.0 0.0,0.5,0.0 75,75,150")
+# Append triangles
+for i in range(ntris):
+	lines.append(gen_triangle())
 
 # Write the result in random.rt
 file = open("random.rt", "w")
