@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:30 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/12 04:45:54 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/21 18:13:27 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,25 @@ void	parse_triangle(char *line, t_prog *prog)
 	new_obj = new_object();
 	new_obj->type = 't';
 	new_obj->object = new_triangle;
+	push_back_object(&(prog->objects), new_obj);
+	free(words);
+}
+
+void parse_square(char *line, t_prog *prog) {
+	char		**words;
+	t_square	*new_square;
+	t_object	*new_obj;
+
+	words = ft_split(line, "\t ");
+	new_square = new_sq();
+	new_square->pos = word_to_vector3(words[1]);
+	new_square->orientation = word_to_vector3(words[2]);
+	new_square->size = atof(words[3]);
+	new_square->color = word_to_color(words[4]);
+	push_back_square(&(prog->squares), new_square);
+	new_obj = new_object();
+	new_obj->type = 'q';
+	new_obj->object = new_square;
 	push_back_object(&(prog->objects), new_obj);
 	free(words);
 }

@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/12 04:48:37 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/21 20:50:36 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,14 @@ typedef struct		s_tri {
 	struct s_tri	*next;
 }					t_tri;
 
+typedef struct		s_square {
+	t_vec3			*pos;
+	t_vec3			*orientation;
+	double			size;
+	t_color			*color;
+	struct s_square	*next;
+}					t_square;
+
 typedef struct		s_prog {
 	void			*mlx_ptr;
 	void			*win_ptr;
@@ -111,7 +119,8 @@ typedef struct		s_prog {
 	t_sphere		*spheres;
 	t_plane			*planes;
 	t_tri			*triangles;
-	// other objects : cylinder, quad
+	t_square		*squares;
+	// other objects : cylinder
 }					t_prog;
 
 // General
@@ -133,6 +142,7 @@ void				parse_light(char *line, t_prog *prog);
 void				parse_sphere(char *line, t_prog *prog);
 void				parse_plane(char *line, t_prog *prog);
 void				parse_triangle(char *line, t_prog *prog);
+void				parse_square(char *line, t_prog *prog);
 
 t_vec3				*word_to_vector3(char *word);
 t_color				*word_to_color(char *word);
@@ -197,6 +207,12 @@ t_tri				*new_tri(void);
 void				push_back_tri(t_tri **first_tri, t_tri *new_tri);
 double				intersect_tri(t_ray *ray, t_tri *tri);
 t_light_p			*get_light_p_tri(t_ray *ray, t_object *obj);
+
+// Squares
+t_square			*new_sq(void);
+void				push_back_square(t_square **first_square, t_square *new_square);
+double				intersect_square(t_ray *ray, t_square *square);
+t_light_p			*get_light_p_square(t_ray *ray, t_object *obj);
 
 // Utils
 double				get_min_quadratic_solution(double a, double b, double c);

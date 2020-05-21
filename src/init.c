@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:48:12 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/11 23:19:13 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/21 18:09:34 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_prog	*init_prog(void)
 	prog->spheres = NULL;
 	prog->planes = NULL;
 	prog->triangles = NULL;
+	prog->squares = NULL;
 	return(prog);
 }
 

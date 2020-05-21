@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:36 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/12 02:53:46 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/05/21 18:14:10 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	parse_line(char *line, t_prog *prog) {
 	{
 		if (line[1] == 'p')
 			parse_sphere(line, prog);
+		if (line[1] == 'q')
+			parse_square(line, prog);
 	}
 	else if (line[0] == 'p' && line[1] == 'l')
 		parse_plane(line, prog);
