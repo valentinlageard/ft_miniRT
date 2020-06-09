@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/08 22:16:55 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/09 21:54:55 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,7 @@ t_cyl			*new_cyl(void);
 void			push_back_cyl(t_cyl **first_cyl, t_cyl *new_cyl);
 double			intersect_cyl(t_ray *ray, t_cyl *cyl);
 t_light_p		*get_light_p_cyl(t_ray *ray, t_object *obj);
+t_vec3			*get_cyl_axis(t_cyl *cyl);
 
 // Utils
 double			get_min_quadratic_solution(double a, double b, double c);

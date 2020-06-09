@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 17:33:15 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/08 17:45:51 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/09 21:54:37 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,18 @@ void	push_back_cyl(t_cyl **first_cyl, t_cyl *new_cyl)
 			tmp = tmp->next;
 		tmp->next = new_cyl;
 	}
+}
+
+t_vec3	*get_cyl_axis(t_cyl *cyl)
+{
+	t_vec3	*ccyl;
+	t_vec3	*rccyl;
+	t_vec3	*ca;
+	
+	ccyl = new_vec3(0.0, 1.0, 0.0);
+	rccyl = vec3_rotateXYZ(ccyl, cyl->orientation);
+	ca = vec3_normalize(rccyl);
+	free(ccyl);
+	free(rccyl);
+	return (ca);
 }
