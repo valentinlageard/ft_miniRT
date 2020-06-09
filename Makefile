@@ -24,6 +24,8 @@ SRC			=	src/miniRT.c \
 				src/scene/triangle_maths.c \
 				src/scene/square.c \
 				src/scene/square_maths.c \
+				src/scene/cylinder.c \
+				src/scene/cylinder_maths.c \
 				src/utils/color.c \
 				src/utils/vector.c \
 				src/utils/vector_maths.c \

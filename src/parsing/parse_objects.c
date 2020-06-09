@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:30 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/21 18:13:27 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/08 17:52:09 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parse_sphere(char *line, t_prog *prog)
 	words = ft_split(line, "\t ");
 	new_sph = new_sphere();
 	new_sph->pos = word_to_vector3(words[1]);
-	new_sph->radius = atof(words[2]) / 2.0;
+	new_sph->radius = ft_atof(words[2]) / 2.0;
 	new_sph->color = word_to_color(words[3]);
 	push_back_sphere(&(prog->spheres), new_sph);
 	new_obj = new_object();
@@ -70,7 +70,8 @@ void	parse_triangle(char *line, t_prog *prog)
 	free(words);
 }
 
-void parse_square(char *line, t_prog *prog) {
+void	parse_square(char *line, t_prog *prog)
+{
 	char		**words;
 	t_square	*new_square;
 	t_object	*new_obj;
@@ -79,12 +80,32 @@ void parse_square(char *line, t_prog *prog) {
 	new_square = new_sq();
 	new_square->pos = word_to_vector3(words[1]);
 	new_square->orientation = word_to_vector3(words[2]);
-	new_square->size = atof(words[3]);
+	new_square->size = ft_atof(words[3]);
 	new_square->color = word_to_color(words[4]);
 	push_back_square(&(prog->squares), new_square);
 	new_obj = new_object();
 	new_obj->type = 'q';
 	new_obj->object = new_square;
+	push_back_object(&(prog->objects), new_obj);
+	free(words);
+}
+
+void	parse_cyl(char *line, t_prog *prog)
+{
+	char		**words;
+	t_cyl		*new_cylinder;
+	t_object	*new_obj;
+	
+	words = ft_split(line, "\t ");
+	new_cylinder = new_cyl();
+	new_cylinder->pos = word_to_vector3(words[1]);
+	new_cylinder->orientation = word_to_vector3(words[2]);
+	new_cylinder->diameter = ft_atof(words[3]);
+	new_cylinder->size = ft_atof(words[4]);
+	new_cylinder->color = word_to_color(words[5]);
+	new_obj = new_object();
+	new_obj->type = 'c';
+	new_obj->object = new_cylinder;
 	push_back_object(&(prog->objects), new_obj);
 	free(words);
 }

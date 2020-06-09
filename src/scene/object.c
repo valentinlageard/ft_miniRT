@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:17:25 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/21 20:52:11 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/08 21:41:16 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ double		intersect_object(t_ray *ray, t_object *object)
 		return (intersect_tri(ray, (t_tri *)object->object));
 	else if (object->type == 'q')
 		return (intersect_square(ray, (t_square *)object->object));
+	else if (object->type == 'c')
+		return (intersect_cyl(ray, (t_cyl *)object->object));
 	else
 		return (1000.0);
 }
@@ -61,6 +63,8 @@ t_light_p	*get_light_p_object(t_ray *ray, t_object *object)
 		return (get_light_p_tri(ray, object));
 	else if (object->type == 'q')
 		return (get_light_p_square(ray, object));
+	else if (object->type == 'c')
+		return (get_light_p_cyl(ray, object));
 	else
 		return (NULL);
 }

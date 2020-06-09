@@ -6,19 +6,25 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:36 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/21 18:14:10 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/08 17:53:42 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	parse_line(char *line, t_prog *prog) {
+void	parse_line(char *line, t_prog *prog)
+{
 	if (line[0] == 'R')
 		parse_resolution(line, prog);
 	else if (line[0] == 'A')
 		parse_ambient(line, prog);
 	else if (line[0] == 'c')
-		parse_camera(line, prog);
+	{
+		if (line[1] == 'y')
+			parse_cyl(line, prog);
+		else
+			parse_camera(line, prog);
+	}
 	else if (line[0] == 'l')
 		parse_light(line, prog);
 	else if (line[0] == 's')
