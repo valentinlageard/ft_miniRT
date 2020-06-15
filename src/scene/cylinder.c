@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 17:33:15 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/09 21:54:37 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/10 02:53:05 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,49 @@ t_vec3	*get_cyl_axis(t_cyl *cyl)
 	free(ccyl);
 	free(rccyl);
 	return (ca);
+}
+
+t_vec3	*get_cyl_up_p(t_cyl *cyl, t_vec3 *ca)
+{
+	t_vec3	*vtmp1;
+	t_vec3	*vtmp2;
+	t_vec3	*up_p;
+
+	vtmp1 = new_vec3(cyl->size,cyl->size,cyl->size);
+	vtmp2 = vec3_mul(vtmp1, ca);
+	up_p = vec3_add(vtmp2, cyl->pos);
+	free(vtmp1);
+	free(vtmp2);
+	return (up_p);
+}
+
+int	check_cyl_limits(t_cyl *cyl, t_vec3 *ca, double t, t_ray *ray)
+{
+	t_vec3	*hit_p;
+	t_vec3	*tmp;
+	t_vec3	*up_p;
+	int		res;
+
+	hit_p = new_vec3(
+		ray->orig->x + ray->dir->x * t,
+		ray->orig->y + ray->dir->y * t,
+		ray->orig->z + ray->dir->z * t);
+	tmp = vec3_sub(hit_p, cyl->pos);
+	res = vec3_dot(ca, tmp) >= 0;
+	free(tmp);
+	if (res)
+	{
+		up_p = get_cyl_up_p(cyl, ca);
+		tmp = vec3_sub(hit_p, up_p);
+		res = vec3_dot(ca, tmp) <= 0;
+		free(tmp);
+		free(hit_p);
+		free(up_p);
+		return (res);
+	}
+	else
+	{
+		free(hit_p);
+		return (0);
+	}
 }

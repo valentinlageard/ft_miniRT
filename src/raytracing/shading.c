@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 17:06:22 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/14 17:43:56 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/15 16:58:40 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int		check_shadow(t_ray *shadow_ray, t_light *light, t_object *object, t_prog *p
 	dist = vec3_get_distance(shadow_ray->orig, light->pos);
 	while (tmp)
 	{
-		if (tmp != object)
+		if (tmp != object || tmp->type == 'c')
 		{
 			new_dist = intersect_object(shadow_ray, tmp);
-			if (new_dist < dist && new_dist > 0)
+			if (new_dist < dist && new_dist > 0.00001)
 				return (1);
 		}
 		tmp = tmp->next;
