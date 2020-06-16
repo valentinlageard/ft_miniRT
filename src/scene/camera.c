@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:48:15 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/14 17:59:52 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/16 17:13:19 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,23 @@ void	compute_camera_projection(t_prog *prog)
 {
 	double	inv_ratio;
 
-	printf("fov : %i\n", prog->current_cam->fov);
 	prog->half_width = (double)(tan((prog->current_cam->fov * (PI/180))/2.0));
-	printf("half_width : %f\n", prog->half_width);
 	inv_ratio = ((double)(prog->win_height))/((double)(prog->win_width));
 	prog->half_height = inv_ratio * prog->half_width;
-	printf("half_height : %f\n", prog->half_height);
+}
+
+void	free_cams(t_cam *cam)
+{
+	t_cam	*current;
+	t_cam	*next;
+
+	current = cam;
+	while (current)
+	{
+		next = current->next;
+		free(current->pos);
+		free(current->orientation);
+		free(current);
+		current = next;
+	}
 }

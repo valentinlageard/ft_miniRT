@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 18:15:59 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/21 20:50:44 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/16 18:22:54 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,15 @@ double	intersect_square(t_ray *ray, t_square *square)
 		ray->orig->z + t * ray->dir->z);
 	if (check_inside_square(new_vec3(square->size, 0, 0), p_hit, square) && 
 		check_inside_square(new_vec3(0, square->size, 0), p_hit, square))
-		return (t);
+		{
+			free(p_hit);
+			return (t);
+		}
 	else
+	{
+		free(p_hit);
 		return (-1.0);
+	}
 	// Gérer les rayons parallèles !
 	// Add inside out checks !
 }

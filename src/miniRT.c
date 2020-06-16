@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:49:02 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/05 19:37:17 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/16 18:48:48 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int main(int ac, char **av)
 	}
 	if (*av != 0)
 		return (0);
+	while (1);
 	return (0);
 }

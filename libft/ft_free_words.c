@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   callbacks.c                                        :+:      :+:    :+:   */
+/*   ft_free_words.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/04 18:47:53 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/16 17:34:26 by vlageard         ###   ########.fr       */
+/*   Created: 2020/06/15 19:35:53 by vlageard          #+#    #+#             */
+/*   Updated: 2020/06/15 19:39:19 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include <stdlib.h>
 
-int key_callback(int k, int *param)
+void	ft_free_words(char **words)
 {
-	printf("k : %d\n", k);
-	if (k == 99)
-		change_camera((t_prog *)(param));
-	if (k == 65307)
-		quit((t_prog *)(param));
-	return (0);
+	int i;
+
+	i = 0;
+	while (words[i])
+	{
+		free(words[i]);
+		i++;
+	}
+	free(words);
 }

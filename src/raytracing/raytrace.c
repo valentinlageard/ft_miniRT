@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:42:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/15 00:45:13 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/16 19:33:39 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void	compute_image(t_prog *prog)
 	y = 0;
 	init_img(prog);
 	compute_camera_projection(prog);
-	printf("win_width : %i / win_height : %i\n", prog->win_width, prog->win_height);
-	printf("cam->pos : ");
-	print_vec3(prog->current_cam->pos);
-	printf("cam->dir : ");
-	print_vec3(prog->current_cam->orientation);
-	printf("cam->fov : %i\n", prog->current_cam->fov);
-	printf("Rendering scene...\n");
+	//printf("win_width : %i / win_height : %i\n", prog->win_width, prog->win_height);
+	//printf("cam->pos : ");
+	//print_vec3(prog->current_cam->pos);
+	//printf("cam->dir : ");
+	//print_vec3(prog->current_cam->orientation);
+	//printf("cam->fov : %i\n", prog->current_cam->fov);
+	//printf("Rendering scene...\n");
 	while (y < prog->win_height) // Pour chaque ligne
 	{
 		if (y % 10 == 0)

@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:18:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/05 19:18:21 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/16 18:31:37 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,12 @@ t_light_p	*new_light_p(t_vec3 *hit_p, t_vec3 *normal, t_vec3 *vcolor, t_object *
 	new_light_point->vcolor = vcolor;
 	new_light_point->object = object;
 	return (new_light_point);
+}
+
+void free_lp(t_light_p *lp)
+{
+	free(lp->hit_p);
+	free(lp->normal);
+	free(lp->vcolor);
+	free(lp);
 }

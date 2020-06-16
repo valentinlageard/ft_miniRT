@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/15 21:47:14 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/18 16:39:47 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/16 16:52:49 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,20 @@ int		len_lights(t_light *first_light)
 		tmp = tmp->next;
 	}
 	return (i);
+}
+
+void	free_lights(t_light *light)
+{
+	t_light	*current;
+	t_light	*next;
+
+	current = light;
+	while (current)
+	{
+		next = current->next;
+		free(current->pos);
+		free(current->color);
+		free(current);
+		current = next;
+	}
 }

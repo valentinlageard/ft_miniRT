@@ -5,33 +5,35 @@ SRC			=	src/miniRT.c \
 				src/interactions/callbacks.c \
 				src/interactions/user_actions.c \
 				src/parsing/parse_file.c \
+				src/parsing/parse_objects.c \
 				src/parsing/parse_scene.c \
 				src/parsing/parsing_utils.c \
-				src/parsing/parse_objects.c \
-				src/raytracing/raytrace.c \
-				src/raytracing/ray.c \
 				src/raytracing/img_utils.c \
-				src/raytracing/shading.c \
 				src/raytracing/light_point.c \
+				src/raytracing/ray.c \
+				src/raytracing/raytrace.c \
+				src/raytracing/shading.c \
 				src/scene/camera.c \
+				src/scene/cylinder_maths.c \
+				src/scene/cylinder.c \
 				src/scene/light.c \
 				src/scene/object.c \
-				src/scene/sphere.c \
-				src/scene/sphere_maths.c \
-				src/scene/plane.c \
 				src/scene/plane_maths.c \
-				src/scene/triangle.c \
-				src/scene/triangle_maths.c \
-				src/scene/square.c \
+				src/scene/plane.c \
+				src/scene/sphere_maths.c \
+				src/scene/sphere.c \
 				src/scene/square_maths.c \
-				src/scene/cylinder.c \
-				src/scene/cylinder_maths.c \
+				src/scene/square.c \
+				src/scene/triangle_maths.c \
+				src/scene/triangle.c \
 				src/utils/color.c \
-				src/utils/vector.c \
+				src/utils/free_objects.c \
+				src/utils/quit.c \
+				src/utils/solve_quadratic.c \
 				src/utils/vector_maths.c \
 				src/utils/vector_maths2.c \
 				src/utils/vector_rotation.c \
-				src/utils/solve_quadratic.c
+				src/utils/vector.c
 
 OBJS		=	$(SRC:.c=.o)
 

@@ -52,7 +52,8 @@ SRC			=	ft_atoi.c \
 				ft_ultoabase.c \
 				ft_abs.c \
 				ft_get_next_line.c \
-				ft_atof.c
+				ft_atof.c \
+				ft_free_words.c
 
 OBJS		=	$(SRC:.c=.o)
 

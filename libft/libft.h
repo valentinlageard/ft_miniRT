@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 21:08:46 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/06 16:44:03 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/15 19:39:27 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_putstr_fd(char *s, int fd);
+void			ft_free_words(char **words);
 
 #endif

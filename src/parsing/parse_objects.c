@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:30 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/08 17:52:09 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/16 18:56:03 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	parse_sphere(char *line, t_prog *prog)
 	new_obj->type = 's';
 	new_obj->object = new_sph;
 	push_back_object(&(prog->objects), new_obj);
-	free(words);
+	ft_free_words(words);
 }
 
 void	parse_plane(char *line, t_prog *prog)
@@ -47,7 +47,7 @@ void	parse_plane(char *line, t_prog *prog)
 	new_obj->type = 'p';
 	new_obj->object = new_plane;
 	push_back_object(&(prog->objects), new_obj);
-	free(words);
+	ft_free_words(words);
 }
 
 void	parse_triangle(char *line, t_prog *prog)
@@ -67,7 +67,7 @@ void	parse_triangle(char *line, t_prog *prog)
 	new_obj->type = 't';
 	new_obj->object = new_triangle;
 	push_back_object(&(prog->objects), new_obj);
-	free(words);
+	ft_free_words(words);
 }
 
 void	parse_square(char *line, t_prog *prog)
@@ -87,7 +87,7 @@ void	parse_square(char *line, t_prog *prog)
 	new_obj->type = 'q';
 	new_obj->object = new_square;
 	push_back_object(&(prog->objects), new_obj);
-	free(words);
+	ft_free_words(words);
 }
 
 void	parse_cyl(char *line, t_prog *prog)
@@ -103,9 +103,10 @@ void	parse_cyl(char *line, t_prog *prog)
 	new_cylinder->diameter = ft_atof(words[3]);
 	new_cylinder->size = ft_atof(words[4]);
 	new_cylinder->color = word_to_color(words[5]);
+	push_back_cyl(&(prog->cylinders), new_cylinder);
 	new_obj = new_object();
 	new_obj->type = 'c';
 	new_obj->object = new_cylinder;
 	push_back_object(&(prog->objects), new_obj);
-	free(words);
+	ft_free_words(words);
 }

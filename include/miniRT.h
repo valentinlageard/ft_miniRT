@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/15 16:17:20 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/16 18:39:46 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void			print_vec3(t_vec3 *vec3); // To remove
 
 // Light points
 t_light_p		*new_light_p(t_vec3 *hit_p, t_vec3 *normal, t_vec3 *vcolor, t_object *object);
+void			free_lp(t_light_p *lp);
 
 // Lights
 t_light			*new_light(void);
@@ -244,5 +245,16 @@ int				key_callback(int k, int *param);
 
 // User actions
 void			change_camera(t_prog *prog);
+
+// Exit
+void			quit(t_prog *prog);
+void			free_cyls(t_cyl *cyl);
+void			free_planes(t_plane *plane);
+void			free_spheres(t_sphere *sphere);
+void			free_squares(t_square *square);
+void			free_triangles(t_tri *tri);
+void			free_cams(t_cam *cam);
+void			free_lights(t_light *light);
+void			free_objects(t_object *object);
 
 #endif

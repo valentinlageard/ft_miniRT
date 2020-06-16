@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:43 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/11 15:28:27 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/15 19:38:42 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	parse_resolution(char *line, t_prog *prog)
 	words = ft_split(line, "\t ");
 	prog->win_width = ft_atoi(words[1]);
 	prog->win_height = ft_atoi(words[2]);
-	free(words);
+	ft_free_words(words);
 }
 
 void	parse_camera(char *line, t_prog *prog)
@@ -35,7 +35,7 @@ void	parse_camera(char *line, t_prog *prog)
 	if (!prog->current_cam)
 		prog->current_cam = new_cam;
 	push_back_cam(&(prog->cams), new_cam);
-	free(words);
+	ft_free_words(words);
 }
 
 void parse_ambient(char *line, t_prog *prog)
@@ -45,7 +45,7 @@ void parse_ambient(char *line, t_prog *prog)
 	words = ft_split(line, "\t ");
 	prog->ambient_intensity = ft_atof(words[1]);
 	prog->ambient_color = word_to_color(words[2]);
-	free(words);
+	ft_free_words(words);
 }
 
 void	parse_light(char *line, t_prog *prog)
@@ -59,5 +59,5 @@ void	parse_light(char *line, t_prog *prog)
 	new_spot->intensity = ft_atof(words[2]);
 	new_spot->color = word_to_color(words[3]);
 	push_back_light(&(prog->lights), new_spot);
-	free(words);
+	ft_free_words(words);
 }

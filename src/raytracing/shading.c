@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 17:06:22 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/15 16:58:40 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/16 18:35:29 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ t_vec3	*get_shading_point(t_ray *ray, t_object *object, t_prog *prog)
 	// Clamp to avoid artifacts
 	cumu_r_vcolor = vec3_clamp(previous_vcolor, 1.0);
 	free(previous_vcolor);
+	free_lp(lp);
 	return (cumu_r_vcolor);
 }

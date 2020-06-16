@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:17:25 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/08 21:41:16 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/16 16:35:41 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,18 @@ t_light_p	*get_light_p_object(t_ray *ray, t_object *object)
 		return (get_light_p_cyl(ray, object));
 	else
 		return (NULL);
+}
+
+void	free_objects(t_object *object)
+{
+	t_object	*current;
+	t_object	*next;
+
+	current = object;
+	while (current)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
 }
