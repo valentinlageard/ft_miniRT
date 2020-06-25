@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 14:05:59 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/25 16:17:14 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/26 01:15:27 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,21 @@ void	fill_bmp_data(char **bmp, t_prog *prog)
 	unsigned int	i;
 
 	i = HEADER_SIZE;
-	y = prog->win_height - 1;
-	while (y)
+	y = 0;
+	while (y < prog->win_height)
 	{
 		x = 0;		
 		while (x < prog->win_width)
 		{
-			*(*bmp + i++) = *(prog->img_pixels + ((y * prog->win_width) + x) * 4 + 2);
-			*(*bmp + i++) = *(prog->img_pixels + ((y * prog->win_width) + x) * 4 + 1);
-			*(*bmp + i++) = *(prog->img_pixels + ((y * prog->win_width) + x) * 4 + 0);
+			*(*bmp + i++) = *(prog->img_pixels +
+				(((prog->win_height - y - 1) * prog->win_width) + x) * 4 + 0);
+			*(*bmp + i++) = *(prog->img_pixels +
+				(((prog->win_height - y - 1) * prog->win_width) + x) * 4 + 1);
+			*(*bmp + i++) = *(prog->img_pixels +
+				(((prog->win_height - y - 1) * prog->win_width) + x) * 4 + 2);
 			x++;
 		}
-		y--;
+		y++;
 	}
 }
 
@@ -62,7 +65,7 @@ char	*get_filename(t_prog *prog)
 	char			*filename;
 
 	name_len = ft_strlen(prog->name);
-	if (!(filename = (char *)malloc(sizeof(char *) * (name_len + 4 + 1))))
+	if (!(filename = (char *)malloc(sizeof(char) * (name_len + 4 + 1))))
 		return (NULL);
 	ft_strlcpy(filename, prog->name, name_len + 1);
 	ft_strlcat(filename, ".bmp", name_len + 4 + 1);
@@ -77,10 +80,10 @@ void	export_bmp(t_prog *prog)
 	int				fd;
 
 	filename = get_filename(prog);
-	printf("%s\n", filename);
 	img_size = (unsigned int)prog->win_width * (unsigned int)prog->win_height * 3;
 	if (!(bmp = malloc((img_size + HEADER_SIZE) * sizeof(char))))
 		quit(prog);
+	ft_memset(bmp, 0, img_size + HEADER_SIZE);
 	fill_bmp_header(&bmp, prog);
 	fill_bmp_data(&bmp, prog);
 	if ((fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644)) <= 0)
@@ -88,4 +91,5 @@ void	export_bmp(t_prog *prog)
 	write(fd, bmp, (img_size + HEADER_SIZE));
 	close(fd);
 	free(filename);
+	free(bmp);
 }
