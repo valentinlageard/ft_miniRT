@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:42:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/16 19:33:39 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/23 16:41:40 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	compute_image(t_prog *prog)
 {
 	t_object	*current_hit;
 	t_ray		*ray;
-	int			x;
-	int			y;
+	unsigned int	x;
+	unsigned int	y;
 	t_vec3		*p_color;
 	t_vec3		*black;
 
@@ -94,8 +94,7 @@ void	compute_image(t_prog *prog)
 	free(black);
 	printf("Rendering done\n");
 	mlx_put_image_to_window(prog->mlx_ptr, prog->win_ptr, prog->img_ptr, 0, 0);
+	if (prog->export)
+		export_bmp(prog);
 	mlx_destroy_image(prog->mlx_ptr, prog->img_ptr);
 }
-
-
-

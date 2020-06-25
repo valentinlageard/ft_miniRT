@@ -26,6 +26,7 @@ SRC			=	src/miniRT.c \
 				src/scene/square.c \
 				src/scene/triangle_maths.c \
 				src/scene/triangle.c \
+				src/utils/bitmap.c \
 				src/utils/color.c \
 				src/utils/free_objects.c \
 				src/utils/quit.c \

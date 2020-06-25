@@ -6,26 +6,27 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/16 18:39:46 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/25 15:58:47 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <mlx.h>
-#include <math.h>
-#include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <mlx.h>
+# include <math.h>
+# include <unistd.h>
 
-#include <stdio.h>
+# include <stdio.h>
 
-#include "../libft/libft.h"
+# include "../libft/libft.h"
 
-#define PI 3.141592  
+# define PI 3.141592
+# define HEADER_SIZE 122
 
 typedef struct		s_vec3 {
 	double			x;
@@ -113,10 +114,11 @@ typedef struct		s_cyl {
 typedef struct		s_prog {
 	void			*mlx_ptr;
 	void			*win_ptr;
-	int				win_width;
-	int				win_height;
+	unsigned int	win_width;
+	unsigned int	win_height;
 	void			*img_ptr;
 	char			*img_pixels;
+	int				export;
 	t_cam			*cams;
 	t_cam			*current_cam;
 	double			half_width;
@@ -130,6 +132,8 @@ typedef struct		s_prog {
 	t_tri			*triangles;
 	t_square		*squares;
 	t_cyl			*cylinders;
+	char			*name;
+
 }					t_prog;
 
 // General
@@ -143,6 +147,7 @@ void			compute_image(t_prog *prog);
 t_vec3			*get_shading_point(t_ray *ray, t_object *object, t_prog *prog);
 
 // Parsing
+void			parse_name(char *fn, t_prog *prog);
 void			parse_file(char *filename, t_prog *prog);
 void			parse_resolution(char *line, t_prog *prog);
 void			parse_ambient(char *line, t_prog *prog);
@@ -242,6 +247,10 @@ t_vec3			*get_ambient(t_color *color, double intensity);
 
 // Callbacks
 int				key_callback(int k, int *param);
+//int				mouse_callback(int button, int x, int y , int *param);
+int				exit_callback(int *param);
+
+void			export_bmp(t_prog *prog);
 
 // User actions
 void			change_camera(t_prog *prog);

@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 19:07:26 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/16 19:40:33 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:06:33 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	free_scene(t_prog *prog)
 	free_lights(prog->lights);
 	free_cams(prog->cams);
 	free(prog->ambient_color);
+	free(prog->name);
 }
 
 void	quit(t_prog *prog)

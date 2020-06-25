@@ -6,11 +6,27 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:36 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/08 17:53:42 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/25 16:07:01 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+void	parse_name(char *fn, t_prog *prog)
+{
+	
+	unsigned int	fn_len;
+
+	fn_len = ft_strlen(fn);
+	/*
+	if (av[1][fn_len - 3] == '.'
+		& av[1][fn_len - 2] == 'r'
+		& av[1][fn_len - 1] == 't')
+		This an error*/
+	if (!(prog->name = (char *)malloc(sizeof(char) * fn_len - 3 + 1)))
+		quit(prog);
+	ft_strlcpy(prog->name, fn, fn_len - 2);
+}
 
 void	parse_line(char *line, t_prog *prog)
 {
