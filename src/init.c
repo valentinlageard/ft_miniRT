@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:48:12 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/25 15:58:59 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/26 17:31:01 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_prog	*init_prog(void)
 	prog->squares = NULL;
 	prog->cylinders = NULL;
 	prog->name = NULL;
+	prog->errnum = 0;
 	return(prog);
 }
 

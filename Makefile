@@ -4,6 +4,9 @@ SRC			=	src/miniRT.c \
 				src/init.c \
 				src/interactions/callbacks.c \
 				src/interactions/user_actions.c \
+				src/parsing/check_file.c \
+				src/parsing/check_objects.c \
+				src/parsing/check_utils.c \
 				src/parsing/parse_file.c \
 				src/parsing/parse_objects.c \
 				src/parsing/parse_scene.c \

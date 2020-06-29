@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:36 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/25 16:07:01 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/26 18:17:59 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,8 @@ void	parse_name(char *fn, t_prog *prog)
 	unsigned int	fn_len;
 
 	fn_len = ft_strlen(fn);
-	/*
-	if (av[1][fn_len - 3] == '.'
-		& av[1][fn_len - 2] == 'r'
-		& av[1][fn_len - 1] == 't')
-		This an error*/
 	if (!(prog->name = (char *)malloc(sizeof(char) * fn_len - 3 + 1)))
-		quit(prog);
+		error_quit(prog, errno);
 	ft_strlcpy(prog->name, fn, fn_len - 2);
 }
 
@@ -54,6 +49,8 @@ void	parse_line(char *line, t_prog *prog)
 		parse_plane(line, prog);
 	else if (line[0] == 't' && line[1] == 'r')
 		parse_triangle(line, prog);
+	else if (line[0])
+		prog->errnum = -2;
 }
 
 void	parse_file(char *filename, t_prog *prog)
@@ -62,12 +59,26 @@ void	parse_file(char *filename, t_prog *prog)
 	int		ret;
 	char	*line;
 
+	check_filename(filename, prog);
 	fd = open(filename, O_RDONLY);
+	// NEED SECURITY HERE
 	while ((ret = ft_get_next_line(fd, &line)) > 0)
 	{
+		printf("line : %s\n", line);
+		parse_line(line, prog);
+		free(line);
+		printf("prog->errnum : %i\n", prog->errnum);
+		if (prog->errnum != 0)
+			break;
+	}
+	if (prog->errnum == 0)
+	{
+		printf("line : %s\n", line);
 		parse_line(line, prog);
 		free(line);
 	}
-	parse_line(line, prog);
-	free(line);
+	printf("prog->errnum : %i\n", prog->errnum);
+	close(fd);
+	if (prog->errnum != 0)
+		error_quit(prog, prog->errnum);
 }

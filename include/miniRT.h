@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/25 15:58:47 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/29 18:48:16 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <mlx.h>
 # include <math.h>
 # include <unistd.h>
+# include <errno.h>
 
 # include <stdio.h>
 
@@ -133,7 +134,7 @@ typedef struct		s_prog {
 	t_square		*squares;
 	t_cyl			*cylinders;
 	char			*name;
-
+	int				errnum;
 }					t_prog;
 
 // General
@@ -160,6 +161,24 @@ void			parse_square(char *line, t_prog *prog);
 void			parse_cyl(char *line, t_prog *prog);
 t_vec3			*word_to_vector3(char *word);
 t_color			*word_to_color(char *word);
+
+// Checks
+void			check_filename(char *filename, t_prog *prog);
+int				issdigit(char *str);
+int				issfloat(char *str);
+int				issvec3(char *str);
+int				issvec3norm(char *str);
+int				isscol(char *str);
+int				check_sphere(char **words);
+int				check_plane(char **words);
+int				check_triangle(char **words);
+int				check_square(char **words);
+int				check_cyl(char **words);
+int				check_resolution(char **words);
+int				check_camera(char **words);
+int				check_ambient(char **words);
+int				check_light(char **words);
+
 
 // Vectors
 t_vec3			*new_vec3(double x, double y, double z);
@@ -257,6 +276,7 @@ void			change_camera(t_prog *prog);
 
 // Exit
 void			quit(t_prog *prog);
+void			error_quit(t_prog *prog, int errnum);
 void			free_cyls(t_cyl *cyl);
 void			free_planes(t_plane *plane);
 void			free_spheres(t_sphere *sphere);
