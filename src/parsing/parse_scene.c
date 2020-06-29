@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:43 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/29 18:22:57 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/29 20:28:45 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	parse_resolution(char *line, t_prog *prog)
 {
 	char	**words;
 
+	if (prog->win_width != 0 || prog->win_height != 0)
+	{
+		prog->errnum = -2;
+		return;
+	}
 	words = ft_split(line, "\t ");
 	if (!(check_resolution(words)))
 	{
@@ -57,6 +62,11 @@ void parse_ambient(char *line, t_prog *prog)
 {
 	char	**words;
 
+	if (prog->ambient_color)
+	{
+		prog->errnum = -2;
+		return;
+	}	
 	words = ft_split(line, "\t ");
 	if (!(check_ambient(words)))
 	{

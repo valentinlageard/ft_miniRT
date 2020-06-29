@@ -6,11 +6,22 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:36 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/26 18:17:59 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/06/29 20:28:28 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+int	check_necessities(t_prog *prog)
+{
+	if (!prog->win_width || !prog->win_height)
+		return (0);
+	if (!prog->ambient_color)
+		return (0);
+	if (!prog->cams || !prog->current_cam)
+		return (0);
+	return (1);
+}
 
 void	parse_name(char *fn, t_prog *prog)
 {
@@ -79,6 +90,8 @@ void	parse_file(char *filename, t_prog *prog)
 	}
 	printf("prog->errnum : %i\n", prog->errnum);
 	close(fd);
+	if (!check_necessities(prog))
+		prog->errnum = -2;
 	if (prog->errnum != 0)
 		error_quit(prog, prog->errnum);
 }
