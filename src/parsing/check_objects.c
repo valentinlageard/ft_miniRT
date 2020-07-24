@@ -6,11 +6,11 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:50:25 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/29 19:01:56 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 15:57:19 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 int	check_sphere(char **words)
 {

@@ -6,11 +6,13 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:30 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/26 18:19:00 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 20:45:39 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
+
+// Protect against ENOMEM !
 
 void	parse_sphere(char *line, t_prog *prog)
 {
@@ -23,8 +25,7 @@ void	parse_sphere(char *line, t_prog *prog)
 	{
 		ft_free_words(words);
 		prog->errnum = -2;
-		printf("sphere error\n");
-		return;
+		return ;
 	}
 	new_sph = new_sphere();
 	new_sph->pos = word_to_vector3(words[1]);
@@ -49,8 +50,7 @@ void	parse_plane(char *line, t_prog *prog)
 	{
 		ft_free_words(words);
 		prog->errnum = -2;
-		printf("plane error\n");
-		return;
+		return ;
 	}
 	new_plane = new_pl();
 	new_plane->pos = word_to_vector3(words[1]);
@@ -75,8 +75,8 @@ void	parse_triangle(char *line, t_prog *prog)
 	{
 		ft_free_words(words);
 		prog->errnum = -2;
-		printf("triangle error\n");
-		return;
+		ft_printf("triangle error\n");
+		return ;
 	}
 	new_triangle = new_tri();
 	new_triangle->a = word_to_vector3(words[1]);
@@ -102,8 +102,8 @@ void	parse_square(char *line, t_prog *prog)
 	{
 		ft_free_words(words);
 		prog->errnum = -2;
-		printf("square error\n");
-		return;
+		ft_printf("square error\n");
+		return ;
 	}
 	new_square = new_sq();
 	new_square->pos = word_to_vector3(words[1]);
@@ -123,14 +123,14 @@ void	parse_cyl(char *line, t_prog *prog)
 	char		**words;
 	t_cyl		*new_cylinder;
 	t_object	*new_obj;
-	
+
 	words = ft_split(line, "\t ");
 	if (!(check_cyl(words)))
 	{
 		ft_free_words(words);
 		prog->errnum = -2;
-		printf("cyl error\n");
-		return;
+		ft_printf("cyl error\n");
+		return ;
 	}
 	new_cylinder = new_cyl();
 	new_cylinder->pos = word_to_vector3(words[1]);

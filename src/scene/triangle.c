@@ -6,20 +6,20 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 23:23:36 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/11 23:24:13 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:39:11 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 t_tri	*new_tri(void)
 {
 	t_tri	*new_tri;
-	
+
 	if (!(new_tri = (t_tri *)malloc(sizeof(t_tri))))
 		return (NULL);
 	new_tri->next = NULL;
-	return(new_tri);
+	return (new_tri);
 }
 
 void	push_back_tri(t_tri **first_tri, t_tri *new_tri)

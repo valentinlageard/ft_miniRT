@@ -6,13 +6,13 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 23:27:22 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/15 15:31:04 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:38:57 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
-t_vec3	*get_normal_tri(t_tri *tri)
+t_vec3		*get_normal_tri(t_tri *tri)
 {
 	t_vec3	*ab;
 	t_vec3	*ac;
@@ -26,10 +26,10 @@ t_vec3	*get_normal_tri(t_tri *tri)
 	free(ab);
 	free(ac);
 	free(normal);
-	return (norm_normal);	
+	return (norm_normal);
 }
 
-int		inout_check(t_vec3 *hit_point, t_vec3 *normal, t_vec3 *x, t_vec3 *y)
+int			inout_check(t_vec3 *hit_point, t_vec3 *normal, t_vec3 *x, t_vec3 *y)
 {
 	t_vec3	*edge;
 	t_vec3	*vxtohp;
@@ -49,7 +49,7 @@ int		inout_check(t_vec3 *hit_point, t_vec3 *normal, t_vec3 *x, t_vec3 *y)
 	return (res);
 }
 
-double	intersect_tri(t_ray *ray, t_tri *tri)
+double		intersect_tri(t_ray *ray, t_tri *tri)
 {
 	t_vec3	*normal;
 	double	t;
@@ -72,7 +72,7 @@ double	intersect_tri(t_ray *ray, t_tri *tri)
 	return (t);
 }
 
-t_vec3	*get_hit_point_tri(t_ray *ray, t_tri *tri)
+t_vec3		*get_hit_point_tri(t_ray *ray, t_tri *tri)
 {
 	double	t;
 	double	x;

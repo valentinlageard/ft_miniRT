@@ -6,11 +6,11 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 17:34:06 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/15 16:58:37 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:30:39 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 t_vec3		*get_abc_cyl(t_ray *ray, t_vec3 *dp, t_vec3 *ca, double r)
 {
@@ -37,7 +37,7 @@ t_vec3		*get_abc_cyl(t_ray *ray, t_vec3 *dp, t_vec3 *ca, double r)
 	free(vtmp1);
 	free(vtmp2);
 	free(vtmp3);
-	return (abc);	
+	return (abc);
 }
 
 double		intersect_cyl(t_ray *ray, t_cyl *cyl)
@@ -46,7 +46,7 @@ double		intersect_cyl(t_ray *ray, t_cyl *cyl)
 	t_vec3	*dp;
 	t_vec3	*ca;
 	double	t;
-	
+
 	ca = get_cyl_axis(cyl);
 	dp = vec3_sub(ray->orig, cyl->pos);
 	abc = get_abc_cyl(ray, dp, ca, cyl->diameter / 2.0);

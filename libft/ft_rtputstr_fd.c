@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   callbacks.c                                        :+:      :+:    :+:   */
+/*   ft_rtputstr_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/04 18:47:53 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/22 16:21:39 by vlageard         ###   ########.fr       */
+/*   Created: 2020/01/15 23:55:27 by vlageard          #+#    #+#             */
+/*   Updated: 2020/01/20 18:28:50 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	key_callback(int k, int *param)
+int	ft_rtputstr_fd(char *s, int fd)
 {
-	ft_printf("k : %d\n", k);
-	if (k == 99)
-		change_camera((t_prog *)(param));
-	if (k == 65307)
-		quit((t_prog *)(param));
-	return (0);
-}
+	int	i;
+	int	error;
 
-int	exit_callback(int *param)
-{
-	quit((t_prog *)param);
-	return (0);
+	i = 0;
+	while (s[i])
+	{
+		error = ft_rtputchar_fd(s[i], fd);
+		i++;
+		if (error < 0)
+			break ;
+	}
+	return (error);
 }

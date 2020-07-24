@@ -6,20 +6,20 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 18:34:42 by vlageard          #+#    #+#             */
-/*   Updated: 2020/03/17 19:24:27 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:36:45 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 t_sphere	*new_sphere(void)
 {
 	t_sphere	*new_sphere;
-	
+
 	if (!(new_sphere = (t_sphere *)malloc(sizeof(t_sphere))))
 		return (NULL);
 	new_sphere->next = NULL;
-	return(new_sphere);
+	return (new_sphere);
 }
 
 void	push_back_sphere(t_sphere **first_sphere, t_sphere *new_sphere)

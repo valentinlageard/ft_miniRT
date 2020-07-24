@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
-t_vec3	*vec3_rotateX(t_vec3 *vec3, double alpha)
+t_vec3	*vec3_rotatex(t_vec3 *vec3, double alpha)
 {
 	double	y;
 	double	z;
@@ -22,7 +22,7 @@ t_vec3	*vec3_rotateX(t_vec3 *vec3, double alpha)
 	return (new_vec3(vec3->x, y, z));
 }
 
-t_vec3	*vec3_rotateY(t_vec3 *vec3, double beta)
+t_vec3	*vec3_rotatey(t_vec3 *vec3, double beta)
 {
 	double	x;
 	double	z;
@@ -32,7 +32,7 @@ t_vec3	*vec3_rotateY(t_vec3 *vec3, double beta)
 	return (new_vec3(x, vec3->y, z));
 }
 
-t_vec3	*vec3_rotateZ(t_vec3 *vec3, double gamma)
+t_vec3	*vec3_rotatez(t_vec3 *vec3, double gamma)
 {
 	double	x;
 	double	y;
@@ -42,15 +42,15 @@ t_vec3	*vec3_rotateZ(t_vec3 *vec3, double gamma)
 	return (new_vec3(x, y, vec3->z));
 }
 
-t_vec3	*vec3_rotateXYZ(t_vec3 *vec3, t_vec3 *ovec3)
+t_vec3	*vec3_rotatexyz(t_vec3 *vec3, t_vec3 *ovec3)
 {
 	t_vec3	*rvec3;
 	t_vec3	*tmp_x;
 	t_vec3	*tmp_y;
 
-	tmp_x = vec3_rotateX(vec3, ovec3->x);
-	tmp_y = vec3_rotateY(tmp_x, ovec3->y);
-	rvec3 = vec3_rotateZ(tmp_y, ovec3->z);
+	tmp_x = vec3_rotatex(vec3, ovec3->x);
+	tmp_y = vec3_rotatey(tmp_x, ovec3->y);
+	rvec3 = vec3_rotatez(tmp_y, ovec3->z);
 	free(tmp_x);
 	free(tmp_y);
 	return (rvec3);

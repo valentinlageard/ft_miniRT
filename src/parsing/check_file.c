@@ -6,11 +6,11 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 15:33:34 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/29 18:51:47 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 15:56:03 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 void	check_filename(char *filename, t_prog *prog)
 {
@@ -23,7 +23,7 @@ void	check_filename(char *filename, t_prog *prog)
 		error_quit(prog, -1);
 }
 
-int	check_resolution(char **words)
+int		check_resolution(char **words)
 {
 	unsigned int	i;
 
@@ -41,7 +41,7 @@ int	check_resolution(char **words)
 	return (1);
 }
 
-int	check_camera(char **words)
+int		check_camera(char **words)
 {
 	unsigned int	i;
 
@@ -63,7 +63,7 @@ int	check_camera(char **words)
 	return (1);
 }
 
-int	check_ambient(char **words)
+int		check_ambient(char **words)
 {
 	unsigned int	i;
 
@@ -83,7 +83,7 @@ int	check_ambient(char **words)
 	return (1);
 }
 
-int	check_light(char **words)
+int		check_light(char **words)
 {
 	unsigned int	i;
 

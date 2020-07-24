@@ -6,20 +6,20 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 18:03:48 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/21 18:10:12 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:38:11 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 t_square	*new_sq(void)
 {
 	t_square	*new_square;
-	
+
 	if (!(new_square = (t_square *)malloc(sizeof(t_square))))
 		return (NULL);
 	new_square->next = NULL;
-	return(new_square);
+	return (new_square);
 }
 
 void	push_back_square(t_square **first_square, t_square *new_square)

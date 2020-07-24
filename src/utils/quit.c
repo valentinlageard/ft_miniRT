@@ -6,11 +6,11 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 19:07:26 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/26 17:39:59 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:42:21 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 void	free_scene(t_prog *prog)
 {
@@ -42,11 +42,11 @@ void	quit(t_prog *prog)
 void	pcustomerror(int errnum)
 {
 	// REPLACE ALL PRINTFS BY FT_PRINTFS
-	printf("Error\n");
+	ft_printf("Error\n");
 	if (errnum == -1)
-		printf("Filename error\n");
+		ft_printf("Filename error\n");
 	if (errnum == -2)
-		printf("Configuration file error\n");
+		ft_printf("Configuration file error\n");
 }
 
 void	error_quit(t_prog *prog, int errnum)

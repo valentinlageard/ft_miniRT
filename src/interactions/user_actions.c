@@ -6,11 +6,11 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 19:00:32 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/04 19:14:08 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 15:55:00 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 void	change_camera(t_prog *prog)
 {

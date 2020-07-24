@@ -6,20 +6,20 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 16:39:56 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/05 19:24:43 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:34:22 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
-t_vec3	*get_normal_plane(t_ray *ray, t_plane *plane)
+t_vec3		*get_normal_plane(t_ray *ray, t_plane *plane)
 {
 	t_vec3	*tmp;
 	t_vec3	*rot_normal;
 	t_vec3	*inv_normal;
 
 	tmp = new_vec3(0.0,0.0,1.0);
-	rot_normal = vec3_rotateXYZ(tmp, plane->orientation);
+	rot_normal = vec3_rotatexyz(tmp, plane->orientation);
 	free(tmp);
 	if (vec3_cos_angle(rot_normal, ray->dir) > 0)
 	{
@@ -33,7 +33,7 @@ t_vec3	*get_normal_plane(t_ray *ray, t_plane *plane)
 		return (rot_normal);
 }
 
-double	intersect_plane(t_ray *ray, t_plane *plane)
+double		intersect_plane(t_ray *ray, t_plane *plane)
 {
 	t_vec3	*tmp;
 	t_vec3	*rot_normal;
@@ -50,7 +50,7 @@ double	intersect_plane(t_ray *ray, t_plane *plane)
 	return (numer / denom);
 }
 
-t_vec3	*get_hit_point_plane(t_ray *ray, t_plane *plane)
+t_vec3		*get_hit_point_plane(t_ray *ray, t_plane *plane)
 {
 	double	t;
 	double	hp_x;

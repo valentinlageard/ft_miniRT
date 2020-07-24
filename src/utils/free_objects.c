@@ -6,11 +6,11 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 19:40:58 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/16 20:52:21 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:41:43 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 void	free_cyls(t_cyl *cyl)
 {

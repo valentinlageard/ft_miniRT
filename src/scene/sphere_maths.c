@@ -6,13 +6,13 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/17 19:24:30 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/05 19:37:05 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:35:57 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
-double	intersect_sphere(t_ray *ray, t_sphere *sphere)
+double		intersect_sphere(t_ray *ray, t_sphere *sphere)
 {
 	t_vec3	*oc;
 	double	a;
@@ -22,12 +22,12 @@ double	intersect_sphere(t_ray *ray, t_sphere *sphere)
 	oc = vec3_sub(ray->orig, sphere->pos);
 	a = vec3_dot(ray->dir, ray->dir);
 	b = 2 * vec3_dot(ray->dir,oc);
-	c = vec3_dot(oc, oc) - sphere->radius*sphere->radius;
+	c = vec3_dot(oc, oc) - sphere->radius * sphere->radius;
 	free(oc);
 	return (get_min_quadratic_solution(a, b, c));
 }
 
-t_vec3	*get_hit_point_sphere(t_ray *ray, t_sphere *sphere)
+t_vec3		*get_hit_point_sphere(t_ray *ray, t_sphere *sphere)
 {
 	double	t;
 	double	hp_x;
@@ -41,7 +41,7 @@ t_vec3	*get_hit_point_sphere(t_ray *ray, t_sphere *sphere)
 	return (new_vec3(hp_x, hp_y, hp_z));
 }
 
-t_vec3	*get_normal_sphere(t_vec3 *hit_p, t_sphere *sphere)
+t_vec3		*get_normal_sphere(t_vec3 *hit_p, t_sphere *sphere)
 {
 	t_vec3	*tmp;
 	t_vec3	*normal;
@@ -66,4 +66,3 @@ t_light_p	*get_light_p_sphere(t_ray *ray, t_object *obj)
 	vcolor = coltovec3(sphere->color);
 	return (new_light_p(hit_point, normal, vcolor, obj));
 }
-

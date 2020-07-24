@@ -6,11 +6,11 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 14:05:59 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/26 01:15:27 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 21:23:21 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 void	fill_bmp_header(char **bmp, t_prog *prog)
 {
@@ -44,7 +44,7 @@ void	fill_bmp_data(char **bmp, t_prog *prog)
 	y = 0;
 	while (y < prog->win_height)
 	{
-		x = 0;		
+		x = 0;
 		while (x < prog->win_width)
 		{
 			*(*bmp + i++) = *(prog->img_pixels +
@@ -66,7 +66,7 @@ char	*get_filename(t_prog *prog)
 
 	name_len = ft_strlen(prog->name);
 	if (!(filename = (char *)malloc(sizeof(char) * (name_len + 4 + 1))))
-		return (NULL);
+		error_quit(prog, errno);
 	ft_strlcpy(filename, prog->name, name_len + 1);
 	ft_strlcat(filename, ".bmp", name_len + 4 + 1);
 	return (filename);
@@ -80,9 +80,10 @@ void	export_bmp(t_prog *prog)
 	int				fd;
 
 	filename = get_filename(prog);
-	img_size = (unsigned int)prog->win_width * (unsigned int)prog->win_height * 3;
+	img_size = (unsigned int)prog->win_width *
+		(unsigned int)prog->win_height * 3;
 	if (!(bmp = malloc((img_size + HEADER_SIZE) * sizeof(char))))
-		quit(prog);
+		error_quit(prog, errno);
 	ft_memset(bmp, 0, img_size + HEADER_SIZE);
 	fill_bmp_header(&bmp, prog);
 	fill_bmp_data(&bmp, prog);

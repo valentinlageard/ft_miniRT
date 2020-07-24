@@ -1,6 +1,7 @@
 LIBFT		=	libft/libft.a
-NAME		=	miniRT
-SRC			=	src/miniRT.c \
+MLX			=	minilibx-linux/libmlx.a
+NAME		=	minirt
+SRC			=	src/minirt.c \
 				src/init.c \
 				src/interactions/callbacks.c \
 				src/interactions/user_actions.c \
@@ -36,6 +37,7 @@ SRC			=	src/miniRT.c \
 				src/utils/solve_quadratic.c \
 				src/utils/vector_maths.c \
 				src/utils/vector_maths2.c \
+				src/utils/vector_maths3.c \
 				src/utils/vector_rotation.c \
 				src/utils/vector.c
 
@@ -46,11 +48,14 @@ CC			=	gcc $(FLAGS)
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(LIBFT) -lmlx -lXext -lX11 -lm
-			$(CC) $(OBJS) $(LIBFT) -o $(NAME) -lmlx -lXext -lX11 -lm
+$(NAME):	$(OBJS) $(LIBFT) $(MLX) -lmlx -lXext -lX11 -lm
+			$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME) -lmlx -lXext -lX11 -lm
 
 %.o: %.c
 			$(CC) -Iinclude -c $< -o $@  -lmlx -lXext -lX11 -lm
+
+$(MLX):
+			make -C minilibx-linux/
 
 $(LIBFT):
 			make -C libft
@@ -58,10 +63,13 @@ $(LIBFT):
 clean:
 			rm -f $(OBJS)
 			make -C libft clean
+			make -C minilibx-linux clean
 
-fclean:		clean
+fclean:
+			make clean
 			rm -f $(NAME)
 			rm -f $(LIBFT)
+			rm -f $(MLX)
 
 re:			fclean all
 

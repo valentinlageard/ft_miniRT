@@ -6,15 +6,16 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/15 21:47:14 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/16 16:52:49 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:32:56 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 t_light	*new_light(void)
 {
 	t_light *new_spot;
+
 	if (!(new_spot = (t_light *)malloc(sizeof(t_light))))
 		return (NULL);
 	new_spot->next = NULL;

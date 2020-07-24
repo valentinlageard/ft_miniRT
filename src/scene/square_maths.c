@@ -6,20 +6,20 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 18:15:59 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/16 18:22:54 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:37:57 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
-t_vec3	*get_normal_square(t_ray *ray, t_square *square)
+t_vec3		*get_normal_square(t_ray *ray, t_square *square)
 {
 	t_vec3	*tmp;
 	t_vec3	*rot_normal;
 	t_vec3	*inv_normal;
 
 	tmp = new_vec3(0.0,0.0,1.0);
-	rot_normal = vec3_rotateXYZ(tmp, square->orientation);
+	rot_normal = vec3_rotatexyz(tmp, square->orientation);
 	free(tmp);
 	if (vec3_cos_angle(rot_normal, ray->dir) > 0)
 	{
@@ -33,13 +33,13 @@ t_vec3	*get_normal_square(t_ray *ray, t_square *square)
 		return (rot_normal);
 }
 
-int		check_inside_square(t_vec3 *e, t_vec3 *p_hit, t_square *square)
+int			check_inside_square(t_vec3 *e, t_vec3 *p_hit, t_square *square)
 {
 	t_vec3	*re;
 	t_vec3	*v;
 	double	res;
 
-	re = vec3_rotateXYZ(e, square->orientation);
+	re = vec3_rotatexyz(e, square->orientation);
 	v = vec3_sub(p_hit, square->pos);
 	res = vec3_dot(v, re) / vec3_magnitude(re);
 	free(re);
@@ -48,7 +48,7 @@ int		check_inside_square(t_vec3 *e, t_vec3 *p_hit, t_square *square)
 	return (res >= 0 && res <= 1);
 }
 
-double	intersect_square(t_ray *ray, t_square *square)
+double		intersect_square(t_ray *ray, t_square *square)
 {
 	t_vec3	*tmp;
 	t_vec3	*rot_normal;
@@ -78,7 +78,7 @@ double	intersect_square(t_ray *ray, t_square *square)
 	// Add inside out checks !
 }
 
-t_vec3	*get_hit_point_square(t_ray *ray, t_square *square)
+t_vec3		*get_hit_point_square(t_ray *ray, t_square *square)
 {
 	double	t;
 

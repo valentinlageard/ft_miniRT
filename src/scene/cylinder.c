@@ -6,20 +6,20 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 17:33:15 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/10 02:53:05 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:32:37 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 t_cyl	*new_cyl(void)
 {
 	t_cyl	*new_cyl;
-	
+
 	if (!(new_cyl = (t_cyl *)malloc(sizeof(t_cyl))))
 		return (NULL);
 	new_cyl->next = NULL;
-	return(new_cyl);
+	return (new_cyl);
 }
 
 void	push_back_cyl(t_cyl **first_cyl, t_cyl *new_cyl)
@@ -42,9 +42,9 @@ t_vec3	*get_cyl_axis(t_cyl *cyl)
 	t_vec3	*ccyl;
 	t_vec3	*rccyl;
 	t_vec3	*ca;
-	
+
 	ccyl = new_vec3(0.0, 1.0, 0.0);
-	rccyl = vec3_rotateXYZ(ccyl, cyl->orientation);
+	rccyl = vec3_rotatexyz(ccyl, cyl->orientation);
 	ca = vec3_normalize(rccyl);
 	free(ccyl);
 	free(rccyl);

@@ -6,11 +6,11 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/13 16:08:12 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/15 16:17:02 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:42:47 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 double	get_min_quadratic_solution(double a, double b, double c)
 {

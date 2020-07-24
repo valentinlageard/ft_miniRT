@@ -6,17 +6,21 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:42:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/23 16:41:40 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:17:58 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
-void	img_put_pixel(int x, int y, t_vec3 *vcolor, t_prog * prog)
+void		img_put_pixel(int x, int y, t_vec3 *vcolor, t_prog * prog)
 {
-	*(prog->img_pixels + ((y * prog->win_width) + x) * 4 + 2) = (int)(vcolor->x * 255);
-	*(prog->img_pixels + (((y * prog->win_width) + x) * 4) + 1) = (int)(vcolor->y * 255);
-	*(prog->img_pixels + (((y * prog->win_width) + x) * 4) + 0) = (int)(vcolor->z * 255);
+	*(prog->img_pixels + ((y * prog->win_width) + x) * 4 + 2) =
+	(int)(vcolor->x * 255);
+	*(prog->img_pixels + (((y * prog->win_width) + x) * 4) + 1) =
+	(int)(vcolor->y * 255);
+	*(prog->img_pixels + (((y * prog->win_width) + x) * 4) + 0) =
+	(int)(vcolor->z * 255);
+	free(vcolor);
 }
 
 t_object	*collide_ray(t_ray *ray, t_prog *prog)
@@ -42,57 +46,39 @@ t_object	*collide_ray(t_ray *ray, t_prog *prog)
 	return (current_hit);
 }
 
-void	compute_image(t_prog *prog)
+void		compute_xy(t_prog *prog)
 {
-	t_object	*current_hit;
-	t_ray		*ray;
+	t_object		*current_hit;
+	t_ray			*ray;
+	t_vec3			*p_color;
 	unsigned int	x;
 	unsigned int	y;
-	t_vec3		*p_color;
-	t_vec3		*black;
 
-	black = new_vec3(0,0,0);
-	x = 0;
 	y = 0;
-	init_img(prog);
-	compute_camera_projection(prog);
-	//printf("win_width : %i / win_height : %i\n", prog->win_width, prog->win_height);
-	//printf("cam->pos : ");
-	//print_vec3(prog->current_cam->pos);
-	//printf("cam->dir : ");
-	//print_vec3(prog->current_cam->orientation);
-	//printf("cam->fov : %i\n", prog->current_cam->fov);
-	//printf("Rendering scene...\n");
-	while (y < prog->win_height) // Pour chaque ligne
+	while (y < prog->win_height)
 	{
-		if (y % 10 == 0)
-        	printf("-> Rendering line n°%d/%d\n", y, prog->win_height - 1);
-		while (x < prog->win_width) // Pour chaque pixel dans cette ligne
-		{	
-			//printf("----------------\n");
-			//printf("x : %i / y : %i\n", x, y);
-			ray = get_ray(x, y, prog);
-			//printf("ray->orig : ");
-			//print_vec3(ray->orig);
-			//printf("ray->dir : ");
-			//print_vec3(ray->dir);
-			current_hit = collide_ray(ray,prog);
-			if (!current_hit)
-				img_put_pixel(x, y, black, prog);
+		x = 0;
+		while (x < prog->win_width)
+		{
+			if (!(ray = get_ray(x, y, prog)))
+				error_quit(prog, errno);
+			if (!(current_hit = collide_ray(ray,prog)))
+				p_color = new_vec3(0,0,0);
 			else
-			{
 				p_color = get_shading_point(ray, current_hit, prog);
-				img_put_pixel(x, y, p_color, prog);
-				free(p_color);
-			}
+			img_put_pixel(x, y, p_color, prog);
 			free_ray(ray);
 			x++;
 		}
 		y++;
-		x = 0;
 	}
-	free(black);
-	printf("Rendering done\n");
+}
+
+void		compute_image(t_prog *prog)
+{
+	init_img(prog);
+	compute_camera_projection(prog);
+	compute_xy(prog);
 	mlx_put_image_to_window(prog->mlx_ptr, prog->win_ptr, prog->img_ptr, 0, 0);
 	if (prog->export)
 		export_bmp(prog);

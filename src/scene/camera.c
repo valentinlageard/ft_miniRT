@@ -6,15 +6,16 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:48:15 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/16 17:13:19 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:29:24 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
-t_cam	*new_camera(void) {
+t_cam	*new_camera(void)
+{
 	t_cam	*new_cam;
-	
+
 	if (!(new_cam = (t_cam *)malloc(sizeof(t_cam))))
 		return (NULL);
 	new_cam->next = NULL;
@@ -32,7 +33,7 @@ void	push_back_cam(t_cam **first_cam, t_cam *new_cam)
 		tmp = *first_cam;
 		while (tmp->next != NULL)
 			tmp = tmp->next;
-		tmp->next = new_cam;		
+		tmp->next = new_cam;
 	}
 }
 
@@ -40,8 +41,9 @@ void	compute_camera_projection(t_prog *prog)
 {
 	double	inv_ratio;
 
-	prog->half_width = (double)(tan((prog->current_cam->fov * (PI/180))/2.0));
-	inv_ratio = ((double)(prog->win_height))/((double)(prog->win_width));
+	prog->half_width = (double)(tan((prog->current_cam->fov *
+		(PI / 180)) / 2.0));
+	inv_ratio = ((double)(prog->win_height)) / ((double)(prog->win_width));
 	prog->half_height = inv_ratio * prog->half_width;
 }
 

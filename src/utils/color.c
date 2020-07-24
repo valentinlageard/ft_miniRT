@@ -6,11 +6,11 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 03:12:36 by vlageard          #+#    #+#             */
-/*   Updated: 2020/05/11 15:28:43 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:41:34 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 t_vec3	*coltovec3(t_color *color)
 {

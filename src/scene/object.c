@@ -6,23 +6,23 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:17:25 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/16 16:35:41 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:33:22 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 t_object	*new_object(void)
 {
 	t_object	*new_object;
-	
+
 	if (!(new_object = (t_object *)malloc(sizeof(t_object))))
 		return (NULL);
 	new_object->next = NULL;
-	return(new_object);
+	return (new_object);
 }
 
-void	push_back_object(t_object **first_object, t_object *new_object)
+void		push_back_object(t_object **first_object, t_object *new_object)
 {
 	t_object	*tmp;
 
@@ -69,7 +69,7 @@ t_light_p	*get_light_p_object(t_ray *ray, t_object *object)
 		return (NULL);
 }
 
-void	free_objects(t_object *object)
+void		free_objects(t_object *object)
 {
 	t_object	*current;
 	t_object	*next;

@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane.c                                            :+:      :+:    :+:   */
+/*   parse_format_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/05 16:06:31 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/22 16:56:14 by vlageard         ###   ########.fr       */
+/*   Created: 2020/01/08 16:03:48 by vlageard          #+#    #+#             */
+/*   Updated: 2020/07/24 17:42:04 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include <stdlib.h>
+#include "ft_printf.h"
+#include "../libft.h"
 
-t_plane	*new_pl(void)
+t_format	*create_format(void)
 {
-	t_plane	*new_plane;
+	t_format *new_format;
 
-	if (!(new_plane = (t_plane *)malloc(sizeof(t_plane))))
+	if (!(new_format = (t_format *)malloc(sizeof(t_format))))
 		return (NULL);
-	new_plane->next = NULL;
-	return (new_plane);
+	new_format->conversion = 0;
+	new_format->fieldwidth = 0;
+	new_format->fieldwidth_mode = 0;
+	new_format->precision = -1;
+	return (new_format);
 }
 
-void	push_back_plane(t_plane **first_plane, t_plane *new_plane)
+int			is_conversion(char c)
 {
-	t_plane	*tmp;
-
-	if (*first_plane == NULL)
-		*first_plane = new_plane;
-	else
-	{
-		tmp = *first_plane;
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = new_plane;
-	}
+	return (ft_iscinstr(c, "cspdiuxX%"));
 }
