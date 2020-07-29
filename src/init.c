@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:48:12 by vlageard          #+#    #+#             */
-/*   Updated: 2020/06/30 01:53:32 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/29 19:07:14 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,5 @@ t_prog	*init_prog(void)
 
 void	init_win(int width, int height, t_prog *prog)
 {
-	prog->win_width = width;
-	prog->win_height = height;
 	prog->win_ptr = mlx_new_window(prog->mlx_ptr, width, height, "minirt");
 }
