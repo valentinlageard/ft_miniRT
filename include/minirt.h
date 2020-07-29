@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/24 17:54:14 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/29 19:47:10 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,18 +136,14 @@ typedef struct		s_prog {
 	int				errnum;
 }					t_prog;
 
-// General
 t_prog				*init_prog(void);
 void				init_win(int width, int height, t_prog *prog);
 void				init_img(t_prog *prog);
-
-// Raytrace
 
 void				compute_image(t_prog *prog);
 t_vec3				*get_shading_point(t_ray *ray, t_object *object,
 						t_prog *prog);
 
-// Parsing
 void				parse_name(char *fn, t_prog *prog);
 void				parse_file(char *filename, t_prog *prog);
 void				parse_resolution(char *line, t_prog *prog);
@@ -162,7 +158,6 @@ void				parse_cyl(char *line, t_prog *prog);
 t_vec3				*word_to_vector3(char *word);
 t_color				*word_to_color(char *word);
 
-// Checks
 void				check_filename(char *filename, t_prog *prog);
 int					issdigit(char *str);
 int					issfloat(char *str);
@@ -179,7 +174,6 @@ int					check_camera(char **words);
 int					check_ambient(char **words);
 int					check_light(char **words);
 
-// Vectors
 t_vec3				*new_vec3(double x, double y, double z);
 t_vec3				*vec3_cpy(t_vec3 *vec3);
 t_vec3				*vec3_add(t_vec3 *vec1, t_vec3 *vec2);
@@ -197,60 +191,50 @@ double				vec3_magnitude(t_vec3 *vec3);
 double				vec3_cos_angle(t_vec3 *vec1, t_vec3 *vec2);
 double				vec3_get_distance(t_vec3 *vec1, t_vec3 *vec2);
 
-// Light points
 t_light_p			*new_light_p(t_vec3 *hit_p, t_vec3 *normal, t_vec3 *vcolor,
 						t_object *object);
 void				free_lp(t_light_p *lp);
 
-// Lights
 t_light				*new_light(void);
 void				push_back_light(t_light **first_light, t_light *new_light);
 int					len_lights(t_light *first_light);
 
-// Rays
 t_ray				*new_ray(t_vec3 *origin, t_vec3 *dir);
 void				free_ray(t_ray *ray);
 t_ray				*get_ray(int x, int y, t_prog *prog);
 
-// Camera
 t_cam				*new_camera(void);
 void				push_back_cam(t_cam **first_cam, t_cam *new_cam);
 void				compute_camera_projection(t_prog *prog);
 
-// Object
 t_object			*new_object(void);
 void				push_back_object(t_object **first_object,
 						t_object *new_object);
 double				intersect_object(t_ray *ray, t_object *object);
 t_light_p			*get_light_p_object(t_ray *ray, t_object *object);
 
-// Sphere
 t_sphere			*new_sphere(void);
 void				push_back_sphere(t_sphere **first_sphere,
 						t_sphere *new_sphere);
 double				intersect_sphere(t_ray *ray, t_sphere *sphere);
 t_light_p			*get_light_p_sphere(t_ray *ray, t_object *object);
 
-// Plane
 t_plane				*new_pl(void);
 void				push_back_plane(t_plane **first_plane, t_plane *new_plane);
 double				intersect_plane(t_ray *ray, t_plane *plane);
 t_light_p			*get_light_p_plane(t_ray *ray, t_object *object);
 
-// Triangles
 t_tri				*new_tri(void);
 void				push_back_tri(t_tri **first_tri, t_tri *new_tri);
 double				intersect_tri(t_ray *ray, t_tri *tri);
 t_light_p			*get_light_p_tri(t_ray *ray, t_object *obj);
 
-// Squares
 t_square			*new_sq(void);
 void				push_back_square(t_square **first_square,
 						t_square *new_square);
 double				intersect_square(t_ray *ray, t_square *square);
 t_light_p			*get_light_p_square(t_ray *ray, t_object *obj);
 
-// Cylinders
 t_cyl				*new_cyl(void);
 void				push_back_cyl(t_cyl **first_cyl, t_cyl *new_cyl);
 double				intersect_cyl(t_ray *ray, t_cyl *cyl);
@@ -259,25 +243,19 @@ t_vec3				*get_cyl_axis(t_cyl *cyl);
 int					check_cyl_limits(t_cyl *cyl, t_vec3 *ca, double t,
 						t_ray *ray);
 
-// Utils
 double				get_min_quadratic_solution(double a, double b, double c);
 double				get_max_quadratic_solution(double a, double b, double c);
 
-// Colors
 t_vec3				*coltovec3(t_color *color);
 t_vec3				*get_ambient(t_color *color, double intensity);
 
-// Callbacks
 int					key_callback(int k, int *param);
-//int				mouse_callback(int button, int x, int y , int *param);
 int					exit_callback(int *param);
 
 void				export_bmp(t_prog *prog);
 
-// User actions
 void				change_camera(t_prog *prog);
 
-// Exit
 void				quit(t_prog *prog);
 void				error_quit(t_prog *prog, int errnum);
 void				free_cyls(t_cyl *cyl);

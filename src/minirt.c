@@ -6,13 +6,22 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:49:02 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/29 19:10:09 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/29 19:37:28 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(int ac, char **av)
+void	check_options(int ac, char **av, t_prog *prog)
+{
+	if (ac == 3)
+	{
+		if (!ft_strncmp(av[2], "-save", 4))
+			prog->export = 1;
+	}
+}
+
+int		main(int ac, char **av)
 {
 	t_prog	*prog;
 
@@ -23,11 +32,7 @@ int	main(int ac, char **av)
 			perror("Error\n");
 			return (0);
 		}
-		if (ac == 3)
-		{
-			if (!ft_strncmp(av[2], "-save", 4))
-				prog->export = 1;
-		}
+		check_options(ac, av, prog);
 		parse_name(av[1], prog);
 		parse_file(av[1], prog);
 		if (prog->export != 1)
