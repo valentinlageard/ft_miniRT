@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 17:33:15 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/22 16:32:37 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:47:43 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_vec3	*get_cyl_up_p(t_cyl *cyl, t_vec3 *ca)
 	t_vec3	*vtmp2;
 	t_vec3	*up_p;
 
-	vtmp1 = new_vec3(cyl->size,cyl->size,cyl->size);
+	vtmp1 = new_vec3(cyl->size, cyl->size, cyl->size);
 	vtmp2 = vec3_mul(vtmp1, ca);
 	up_p = vec3_add(vtmp2, cyl->pos);
 	free(vtmp1);
@@ -65,17 +65,15 @@ t_vec3	*get_cyl_up_p(t_cyl *cyl, t_vec3 *ca)
 	return (up_p);
 }
 
-int	check_cyl_limits(t_cyl *cyl, t_vec3 *ca, double t, t_ray *ray)
+int		check_cyl_limits(t_cyl *cyl, t_vec3 *ca, double t, t_ray *ray)
 {
 	t_vec3	*hit_p;
 	t_vec3	*tmp;
 	t_vec3	*up_p;
 	int		res;
 
-	hit_p = new_vec3(
-		ray->orig->x + ray->dir->x * t,
-		ray->orig->y + ray->dir->y * t,
-		ray->orig->z + ray->dir->z * t);
+	hit_p = new_vec3(ray->orig->x + ray->dir->x * t,
+		ray->orig->y + ray->dir->y * t, ray->orig->z + ray->dir->z * t);
 	tmp = vec3_sub(hit_p, cyl->pos);
 	res = vec3_dot(ca, tmp) >= 0;
 	free(tmp);

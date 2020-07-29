@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 18:15:59 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/22 16:37:57 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:46:24 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_vec3		*get_normal_square(t_ray *ray, t_square *square)
 	t_vec3	*rot_normal;
 	t_vec3	*inv_normal;
 
-	tmp = new_vec3(0.0,0.0,1.0);
+	tmp = new_vec3(0.0, 0.0, 1.0);
 	rot_normal = vec3_rotatexyz(tmp, square->orientation);
 	free(tmp);
 	if (vec3_cos_angle(rot_normal, ray->dir) > 0)
@@ -63,19 +63,17 @@ double		intersect_square(t_ray *ray, t_square *square)
 	p_hit = new_vec3(ray->orig->x + t * ray->dir->x,
 		ray->orig->y + t * ray->dir->y,
 		ray->orig->z + t * ray->dir->z);
-	if (check_inside_square(new_vec3(square->size, 0, 0), p_hit, square) && 
+	if (check_inside_square(new_vec3(square->size, 0, 0), p_hit, square) &&
 		check_inside_square(new_vec3(0, square->size, 0), p_hit, square))
-		{
-			free(p_hit);
-			return (t);
-		}
+	{
+		free(p_hit);
+		return (t);
+	}
 	else
 	{
 		free(p_hit);
 		return (-1.0);
 	}
-	// Gérer les rayons parallèles !
-	// Add inside out checks !
 }
 
 t_vec3		*get_hit_point_square(t_ray *ray, t_square *square)

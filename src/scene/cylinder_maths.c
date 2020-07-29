@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/08 17:34:06 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/22 16:30:39 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:43:55 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_vec3		*get_abc_cyl(t_ray *ray, t_vec3 *dp, t_vec3 *ca, double r)
 	t_vec3	*vtmp2;
 	t_vec3	*vtmp3;
 
-	abc = new_vec3(0,0,0);
+	abc = new_vec3(0, 0, 0);
 	vtmp1 = new_vec3(
 		ca->x * vec3_dot(ray->dir, ca),
 		ca->y * vec3_dot(ray->dir, ca),
@@ -65,7 +65,7 @@ double		intersect_cyl(t_ray *ray, t_cyl *cyl)
 	return (t);
 }
 
-t_vec3		*get_hit_point_cyl(t_ray *ray, t_cyl * cyl)
+t_vec3		*get_hit_point_cyl(t_ray *ray, t_cyl *cyl)
 {
 	double	t;
 	double	hp_x;
@@ -79,15 +79,13 @@ t_vec3		*get_hit_point_cyl(t_ray *ray, t_cyl * cyl)
 	return (new_vec3(hp_x, hp_y, hp_z));
 }
 
-t_vec3		*get_normal_cyl(t_vec3 *hit_point, t_cyl *cyl, t_ray *ray)
+t_vec3		*get_normal_cyl(t_cyl *cyl, t_ray *ray, t_vec3 *hmp)
 {
-	t_vec3	*hmp;
 	t_vec3	*vtmp1;
 	t_vec3	*vtmp2;
 	t_vec3	*ca;
 	double	cadhmp;
 
-	hmp = vec3_sub(hit_point, cyl->pos);
 	vtmp1 = get_cyl_axis(cyl);
 	cadhmp = vec3_dot(vtmp1, hmp);
 	vtmp2 = new_vec3(cadhmp * vtmp1->x, cadhmp * vtmp1->y, cadhmp * vtmp1->z);
@@ -103,9 +101,9 @@ t_vec3		*get_normal_cyl(t_vec3 *hit_point, t_cyl *cyl, t_ray *ray)
 		ca = vec3_mul(vtmp2, vtmp1);
 		free(vtmp1);
 		free(vtmp2);
-		return (ca);
 	}
-	ca = vtmp2;
+	else
+		ca = vtmp2;
 	return (ca);
 }
 
@@ -118,7 +116,7 @@ t_light_p	*get_light_p_cyl(t_ray *ray, t_object *obj)
 
 	cyl = (t_cyl *)obj->object;
 	hit_point = get_hit_point_cyl(ray, cyl);
-	normal = get_normal_cyl(hit_point, cyl, ray);
+	normal = get_normal_cyl(cyl, ray, vec3_sub(hit_point, cyl->pos));
 	vcolor = coltovec3(cyl->color);
 	return (new_light_p(hit_point, normal, vcolor, obj));
 }

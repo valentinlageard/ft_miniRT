@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 15:35:14 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/24 17:18:18 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:47:10 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_vec3	*get_ray_dir_unoriented(double u, double v, t_prog *prog)
 
 	p_pos = new_vec3((2 * u - 1) * prog->half_width,
 	(1 - 2 * v) * prog->half_height, -1);
-	world_origin = new_vec3(0,0,0);
+	world_origin = new_vec3(0, 0, 0);
 	if (!p_pos || !world_origin)
 	{
 		free(p_pos);

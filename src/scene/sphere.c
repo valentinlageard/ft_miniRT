@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 18:34:42 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/22 16:36:45 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:44:17 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_sphere	*new_sphere(void)
 	return (new_sphere);
 }
 
-void	push_back_sphere(t_sphere **first_sphere, t_sphere *new_sphere)
+void		push_back_sphere(t_sphere **first_sphere, t_sphere *new_sphere)
 {
 	t_sphere	*tmp;
 

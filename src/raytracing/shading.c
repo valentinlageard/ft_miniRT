@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 17:06:22 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/24 17:24:47 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/29 14:41:51 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,16 +108,13 @@ t_vec3	*get_shading_point(t_ray *ray, t_object *object, t_prog *prog)
 		error_quit(prog, errno);
 	previous_vcolor = get_diffuse_shading(lp, prog);
 	ambient_vcolor = get_ambient(prog->ambient_color, prog->ambient_intensity);
-	// Ambient + Diffuse
 	cumu_r_vcolor = vec3_add(previous_vcolor, ambient_vcolor);
 	free(previous_vcolor);
 	free(ambient_vcolor);
 	previous_vcolor = cumu_r_vcolor;
-	// Illumination × object color
 	cumu_r_vcolor = vec3_mul(previous_vcolor, lp->vcolor);
-	free (previous_vcolor);
+	free(previous_vcolor);
 	previous_vcolor = cumu_r_vcolor;
-	// Clamp to avoid artifacts
 	cumu_r_vcolor = vec3_clamp(previous_vcolor, 1.0);
 	free(previous_vcolor);
 	free_lp(lp);

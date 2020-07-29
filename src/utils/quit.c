@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 19:07:26 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/22 16:42:21 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:42:37 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	quit(t_prog *prog)
 
 void	pcustomerror(int errnum)
 {
-	// REPLACE ALL PRINTFS BY FT_PRINTFS
 	ft_printf("Error\n");
 	if (errnum == -1)
 		ft_printf("Filename error\n");

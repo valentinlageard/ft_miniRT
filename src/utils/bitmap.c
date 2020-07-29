@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 14:05:59 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/22 21:23:21 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:41:54 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	fill_bmp_header(char **bmp, t_prog *prog)
 	*(unsigned short *)(*bmp + 26) = 1;
 	*(unsigned short *)(*bmp + 28) = 24;
 	*(unsigned int *)(*bmp + 30) = 0;
-	*(unsigned int *)(*bmp + 34) = (unsigned int)img_size; // Maybe 0 since no compression
-	*(unsigned int *)(*bmp + 38) = 3780; // May be 0
-	*(unsigned int *)(*bmp + 42) = 3780; // May be 0
+	*(unsigned int *)(*bmp + 34) = (unsigned int)img_size;
+	*(unsigned int *)(*bmp + 38) = 3780;
+	*(unsigned int *)(*bmp + 42) = 3780;
 	*(unsigned int *)(*bmp + 46) = 0;
 	*(unsigned int *)(*bmp + 50) = 0;
 }

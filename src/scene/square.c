@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/21 18:03:48 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/22 16:38:11 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:44:07 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_square	*new_sq(void)
 	return (new_square);
 }
 
-void	push_back_square(t_square **first_square, t_square *new_square)
+void		push_back_square(t_square **first_square, t_square *new_square)
 {
 	t_square	*tmp;
 

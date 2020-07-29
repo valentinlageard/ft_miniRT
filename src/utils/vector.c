@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 15:23:23 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/24 17:51:27 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:40:45 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ t_vec3	*new_vec3(double x, double y, double z)
 
 t_vec3	*vec3_cpy(t_vec3 *vec3)
 {
-	return (new_vec3(vec3->x,vec3->y,vec3->z));
+	return (new_vec3(vec3->x, vec3->y, vec3->z));
 }
-

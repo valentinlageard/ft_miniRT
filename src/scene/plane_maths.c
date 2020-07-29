@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/05 16:39:56 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/22 16:34:22 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:49:10 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_vec3		*get_normal_plane(t_ray *ray, t_plane *plane)
 	t_vec3	*rot_normal;
 	t_vec3	*inv_normal;
 
-	tmp = new_vec3(0.0,0.0,1.0);
+	tmp = new_vec3(0.0, 0.0, 1.0);
 	rot_normal = vec3_rotatexyz(tmp, plane->orientation);
 	free(tmp);
 	if (vec3_cos_angle(rot_normal, ray->dir) > 0)
@@ -45,7 +45,6 @@ double		intersect_plane(t_ray *ray, t_plane *plane)
 	numer = vec3_dot(tmp, rot_normal);
 	free(tmp);
 	denom = vec3_dot(ray->dir, rot_normal);
-	// Gérer les rayons parallèles !
 	free(rot_normal);
 	return (numer / denom);
 }

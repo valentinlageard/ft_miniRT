@@ -6,13 +6,11 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:30 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/22 20:45:39 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:41:32 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-// Protect against ENOMEM !
 
 void	parse_sphere(char *line, t_prog *prog)
 {
@@ -75,7 +73,6 @@ void	parse_triangle(char *line, t_prog *prog)
 	{
 		ft_free_words(words);
 		prog->errnum = -2;
-		ft_printf("triangle error\n");
 		return ;
 	}
 	new_triangle = new_tri();
@@ -102,7 +99,6 @@ void	parse_square(char *line, t_prog *prog)
 	{
 		ft_free_words(words);
 		prog->errnum = -2;
-		ft_printf("square error\n");
 		return ;
 	}
 	new_square = new_sq();
@@ -129,7 +125,6 @@ void	parse_cyl(char *line, t_prog *prog)
 	{
 		ft_free_words(words);
 		prog->errnum = -2;
-		ft_printf("cyl error\n");
 		return ;
 	}
 	new_cylinder = new_cyl();

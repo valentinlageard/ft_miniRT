@@ -6,13 +6,13 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:42:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/24 19:17:58 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/07/24 19:39:57 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void		img_put_pixel(int x, int y, t_vec3 *vcolor, t_prog * prog)
+void		img_put_pixel(int x, int y, t_vec3 *vcolor, t_prog *prog)
 {
 	*(prog->img_pixels + ((y * prog->win_width) + x) * 4 + 2) =
 	(int)(vcolor->x * 255);
@@ -62,8 +62,8 @@ void		compute_xy(t_prog *prog)
 		{
 			if (!(ray = get_ray(x, y, prog)))
 				error_quit(prog, errno);
-			if (!(current_hit = collide_ray(ray,prog)))
-				p_color = new_vec3(0,0,0);
+			if (!(current_hit = collide_ray(ray, prog)))
+				p_color = new_vec3(0, 0, 0);
 			else
 				p_color = get_shading_point(ray, current_hit, prog);
 			img_put_pixel(x, y, p_color, prog);
