@@ -48,11 +48,11 @@ CC			=	gcc $(FLAGS)
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(LIBFT) $(MLX) -lmlx -lXext -lX11 -lm
-			$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME) -lmlx -lXext -lX11 -lm
+$(NAME):	$(OBJS) $(LIBFT) $(MLX) -lXext -lX11 -lm
+			$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME) -lXext -lX11 -lm
 
 %.o: %.c
-			$(CC) -Iinclude -c $< -o $@  -lmlx -lXext -lX11 -lm
+			$(CC) -Iinclude -c $< -o $@  -lXext -lX11 -lm
 
 $(MLX):
 			make -C minilibx-linux/
