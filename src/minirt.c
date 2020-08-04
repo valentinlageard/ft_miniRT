@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:49:02 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/29 19:37:28 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/08/04 15:26:41 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		main(int ac, char **av)
 			mlx_key_hook(prog->win_ptr, key_callback, prog);
 			mlx_loop(prog->mlx_ptr);
 		}
+		quit(prog);
 	}
 	return (0);
 }
