@@ -1,6 +1,6 @@
 LIBFT		=	libft/libft.a
 MLX			=	minilibx-linux/libmlx.a
-NAME		=	minirt
+NAME		=	miniRT
 SRC			=	src/minirt.c \
 				src/init.c \
 				src/interactions/callbacks.c \
