@@ -43,7 +43,7 @@ SRC			=	src/minirt.c \
 
 OBJS		=	$(SRC:.c=.o)
 
-FLAGS		=	-Wall -Wextra -Werror -fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror
 CC			=	gcc $(FLAGS)
 
 all:		$(NAME)
