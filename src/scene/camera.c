@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:48:15 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/22 16:29:24 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/08/05 20:37:46 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ void	push_back_cam(t_cam **first_cam, t_cam *new_cam)
 			tmp = tmp->next;
 		tmp->next = new_cam;
 	}
+}
+
+void	push_back_cam_and_set_current(t_cam *new_cam, t_prog *prog)
+{
+	if (!prog->current_cam)
+		prog->current_cam = new_cam;
+	push_back_cam(&(prog->cams), new_cam);
 }
 
 void	compute_camera_projection(t_prog *prog)

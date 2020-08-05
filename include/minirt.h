@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/29 19:47:10 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/08/05 20:38:05 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ t_ray				*get_ray(int x, int y, t_prog *prog);
 
 t_cam				*new_camera(void);
 void				push_back_cam(t_cam **first_cam, t_cam *new_cam);
+void				push_back_cam_and_set_current(t_cam *new_cam, t_prog *prog);
 void				compute_camera_projection(t_prog *prog);
 
 t_object			*new_object(void);

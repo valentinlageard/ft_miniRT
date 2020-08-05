@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 14:05:59 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/24 19:41:54 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/08/05 19:56:43 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	fill_bmp_header(char **bmp, t_prog *prog)
 	unsigned int	img_size;
 
 	img_size = prog->win_width * prog->win_height * 3;
-	*(unsigned short *)*bmp = *(const unsigned int *)(unsigned long)"BM";
+	*(unsigned char *)*bmp = 'B';
+	*(unsigned char *)(*bmp + 1) = 'M';
 	*(unsigned int *)(*bmp + 2) = (img_size + HEADER_SIZE);
 	*(unsigned int *)(*bmp + 6) = (unsigned int)0;
 	*(unsigned char *)(*bmp + 10) = HEADER_SIZE;
