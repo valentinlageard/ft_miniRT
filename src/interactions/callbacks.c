@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 18:47:53 by vlageard          #+#    #+#             */
-/*   Updated: 2020/08/07 17:58:07 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/08/07 18:27:03 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	expose_callback(int *param)
 	if (prog->img_ptr)
 		mlx_put_image_to_window(prog->mlx_ptr, prog->win_ptr, prog->img_ptr,
 			0, 0);
-	ft_printf("Reexpose\n");
 	mlx_expose_hook(prog->win_ptr, expose_callback, prog);
 	return (0);
 }
