@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:42:55 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/29 17:01:07 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/08/07 17:52:14 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void		compute_xy(t_prog *prog)
 
 void		compute_image(t_prog *prog)
 {
+	if (prog->img_ptr)
+		mlx_destroy_image(prog->mlx_ptr, prog->img_ptr);
 	init_img(prog);
 	compute_camera_projection(prog);
 	compute_xy(prog);
@@ -86,5 +88,4 @@ void		compute_image(t_prog *prog)
 		mlx_put_image_to_window(prog->mlx_ptr, prog->win_ptr,
 			prog->img_ptr, 0, 0);
 	}
-	mlx_destroy_image(prog->mlx_ptr, prog->img_ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:47:47 by vlageard          #+#    #+#             */
-/*   Updated: 2020/08/05 20:38:05 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/08/07 17:55:13 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,7 @@ t_vec3				*get_ambient(t_color *color, double intensity);
 
 int					key_callback(int k, int *param);
 int					exit_callback(int *param);
+int					expose_callback(int *param);
 
 void				export_bmp(t_prog *prog);
 

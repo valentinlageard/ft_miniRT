@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 19:07:26 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/24 19:42:37 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/08/07 17:52:48 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	free_scene(t_prog *prog)
 void	quit(t_prog *prog)
 {
 	free_scene(prog);
+	if (prog->img_ptr)
+		mlx_destroy_image(prog->mlx_ptr, prog->img_ptr);
 	if (prog->win_ptr)
 	{
 		mlx_clear_window(prog->mlx_ptr, prog->win_ptr);
