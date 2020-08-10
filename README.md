@@ -1,10 +1,10 @@
-# minirt
+# miniRT
 
 A raytracing project for 42.
 
 **Compilation :** Run `make`.
 
-**Usage :** Run `./minirt FILEPATH [-save]` after compilation.
+**Usage :** Run `./miniRT FILEPATH [-save]` after compilation.
 
 **Options :**
 

@@ -6,7 +6,7 @@
 /*   By: vlageard <vlageard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 17:48:12 by vlageard          #+#    #+#             */
-/*   Updated: 2020/07/29 19:07:14 by vlageard         ###   ########.fr       */
+/*   Updated: 2020/08/10 15:26:45 by vlageard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	init_scene(t_prog *prog)
 {
 	prog->cams = NULL;
 	prog->current_cam = NULL;
-	prog->half_height = 0.0;
 	prog->half_width = 0.0;
+	prog->half_height = 0.0;
 	prog->ambient_intensity = 0.0;
 	prog->ambient_color = NULL;
 	prog->lights = NULL;
@@ -41,6 +41,7 @@ t_prog	*init_prog(void)
 	prog->win_height = 0;
 	prog->img_ptr = NULL;
 	prog->img_pixels = NULL;
+	prog->export = 0;
 	prog->name = NULL;
 	prog->errnum = 0;
 	init_scene(prog);
